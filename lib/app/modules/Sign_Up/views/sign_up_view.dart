@@ -18,7 +18,7 @@ class SignUpView extends GetView<SignUpController> {
                 child: Image.asset('assets/images/PPLogo.png'),
               ),
             ),
-            Text('Sigdn Up')
+            Text('Sign Up')
           ],
         ),
       ),
