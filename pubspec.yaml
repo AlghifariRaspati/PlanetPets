@@ -1,0 +1,34 @@
+name: planet_pets_app
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  smooth_page_indicator: ^1.0.0
+  get: 4.6.5
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^1.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/rafiki.png
+    - assets/images/rafiki2.png
+    - assets/images/rafiki3.png
+    - assets/images/PPLogo.png
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
