@@ -24,6 +24,7 @@ flutter:
     - assets/images/rafiki2.png
     - assets/images/rafiki3.png
     - assets/images/PPLogo.png
+    - assets/images/google_icon.png
 
   fonts:
     - family: Poppins

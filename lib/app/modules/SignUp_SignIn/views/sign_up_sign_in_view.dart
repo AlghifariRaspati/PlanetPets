@@ -50,7 +50,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                 style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 29, 34, 52),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                        borderRadius: BorderRadius.circular(20)),
                     side: BorderSide(width: 2.0, color: Colors.white)),
                 child: Text(
                   "Sign Up",
@@ -72,7 +72,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(255, 255, 79, 50),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
+                      borderRadius: BorderRadius.circular(20)),
                 ),
                 child: Text(
                   "Sign In",
