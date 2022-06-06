@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:planet_pets_app/app/modules/home/views/home_view.dart';
 
 import '../controllers/sign_up_controller.dart';
 
@@ -162,7 +163,12 @@ class _SignUpViewState extends State<SignUpView> {
                     width: 350,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomeView();
+                        }));
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromARGB(255, 255, 79, 50),
                         shape: RoundedRectangleBorder(
@@ -181,7 +187,7 @@ class _SignUpViewState extends State<SignUpView> {
                   Row(children: <Widget>[
                     Expanded(child: Divider()),
                     Text(
-                      " || ",
+                      " OR ",
                       style: TextStyle(
                         color: Colors.black.withOpacity(0.1),
                       ),
@@ -193,7 +199,12 @@ class _SignUpViewState extends State<SignUpView> {
                     width: 350,
                     height: 50,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return HomeView();
+                          }));
+                        },
                         style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           shape: RoundedRectangleBorder(

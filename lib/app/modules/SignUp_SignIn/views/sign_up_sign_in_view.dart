@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_Up/views/sign_up_view.dart';
 
 import '../controllers/sign_up_sign_in_controller.dart';
@@ -39,6 +40,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
               height: 150,
             ),
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 30),
               width: 350,
               height: 55,
               child: ElevatedButton(
@@ -65,10 +67,15 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
               height: 30,
             ),
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 30),
               width: 350,
               height: 55,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return SignInView();
+                  }));
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Color.fromARGB(255, 255, 79, 50),
                   shape: RoundedRectangleBorder(
