@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../controllers/intro_controller.dart';
+import '../controllers/intro.controller.dart';
 
 class IntroBinding extends Bindings {
   @override

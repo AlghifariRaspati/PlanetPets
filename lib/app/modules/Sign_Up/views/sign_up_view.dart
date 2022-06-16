@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/home/views/home_view.dart';
+import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
+import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/widgets/Medium_Text.dart';
 
 import '../controllers/sign_up_controller.dart';
 
@@ -18,7 +21,7 @@ class _SignUpViewState extends State<SignUpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 29, 34, 52),
+      backgroundColor: AppColor.bgColor1,
       body: SafeArea(
         child: ListView(children: [
           Container(
@@ -40,19 +43,16 @@ class _SignUpViewState extends State<SignUpView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Username',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 79, 50),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins'),
+                  MediumText(
+                    text: "Username",
+                    color: AppColor.mainColor,
                   ),
                   SizedBox(height: 5),
                   TextField(
                     style: TextStyle(height: 0.7),
                     decoration: InputDecoration(
                         filled: true,
-                        fillColor: Color.fromARGB(255, 233, 233, 233),
+                        fillColor: AppColor.bgColor2,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(20),
                             borderSide: BorderSide(
@@ -63,12 +63,9 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'E-Mail',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 79, 50),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins'),
+                  MediumText(
+                    text: "Email",
+                    color: AppColor.mainColor,
                   ),
                   SizedBox(height: 5),
                   TextField(
@@ -87,12 +84,9 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Password',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 79, 50),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins'),
+                  MediumText(
+                    text: "Password",
+                    color: AppColor.mainColor,
                   ),
                   SizedBox(height: 5),
                   TextField(
@@ -123,12 +117,9 @@ class _SignUpViewState extends State<SignUpView> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'Confirm Password',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 255, 79, 50),
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Poppins'),
+                  MediumText(
+                    text: "Confirm Password",
+                    color: AppColor.mainColor,
                   ),
                   SizedBox(height: 5),
                   TextField(
@@ -163,25 +154,21 @@ class _SignUpViewState extends State<SignUpView> {
                     width: 350,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return HomeView();
-                        }));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 255, 79, 50),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                      child: Text(
-                        "Sign In",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Poppins',
-                            fontSize: 16),
-                      ),
-                    ),
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return NavBar();
+                          }));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: AppColor.mainColor,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        child: MediumText(
+                          text: "Sign Up",
+                          color: AppColor.blankColor,
+                        )),
                   ),
                   SizedBox(height: 10),
                   Row(children: <Widget>[
@@ -189,7 +176,7 @@ class _SignUpViewState extends State<SignUpView> {
                     Text(
                       " OR ",
                       style: TextStyle(
-                        color: Colors.black.withOpacity(0.1),
+                        color: AppColor.mainBlackColor.withOpacity(0.1),
                       ),
                     ),
                     Expanded(child: Divider()),
@@ -202,7 +189,7 @@ class _SignUpViewState extends State<SignUpView> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return HomeView();
+                            return NavBar();
                           }));
                         },
                         style: ElevatedButton.styleFrom(
@@ -220,14 +207,10 @@ class _SignUpViewState extends State<SignUpView> {
                               ),
                             ),
                             SizedBox(width: 40),
-                            Text(
-                              "Continue with google",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 201, 201, 201),
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Poppins',
-                                  fontSize: 16),
-                            ),
+                            MediumText(
+                              text: "Continue With Google",
+                              color: AppColor.googleColor,
+                            )
                           ],
                         )),
                   ),

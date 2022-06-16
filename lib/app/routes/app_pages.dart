@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
-
 import '../modules/Intro/bindings/intro_binding.dart';
 import '../modules/Intro/views/intro_view.dart';
+import '../modules/Options/bindings/options_binding.dart';
+import '../modules/Options/views/options_view.dart';
 import '../modules/SignUp_SignIn/bindings/sign_up_sign_in_binding.dart';
 import '../modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import '../modules/Sign_In/bindings/sign_in_binding.dart';
@@ -43,6 +44,11 @@ class AppPages {
       name: _Paths.SIGN_UP,
       page: () => SignUpView(),
       binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: _Paths.OPTIONS,
+      page: () => OptionsView(),
+      binding: OptionsBinding(),
     ),
   ];
 }

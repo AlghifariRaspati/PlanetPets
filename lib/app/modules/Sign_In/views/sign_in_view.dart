@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/home/views/home_view.dart';
+import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
+import 'package:planet_pets_app/utils/colors.dart';
 
 import '../controllers/sign_in_controller.dart';
 
@@ -35,7 +37,7 @@ class _SignInViewState extends State<SignInView> {
                     child: RichText(
                         text: TextSpan(
                             style: TextStyle(
-                                color: Color.fromARGB(255, 255, 79, 50),
+                                color: AppColor.mainColor,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins-Bold',
                                 fontSize: 30),
@@ -100,19 +102,22 @@ class _SignInViewState extends State<SignInView> {
                             },
                           )),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Container(
-                      alignment: Alignment.centerRight,
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              primary: Color.fromARGB(255, 29, 34, 52),
-                              shadowColor: Colors.transparent),
+                        alignment: Alignment.centerRight,
+                        child: GestureDetector(
+                          onTap: () {},
                           child: Text(
                             "Forgot Password?",
                             style: TextStyle(
                                 color: Color.fromARGB(255, 255, 79, 50),
                                 fontFamily: "Poppins"),
-                          )),
+                          ),
+                        )),
+                    SizedBox(
+                      height: 10,
                     ),
                     Container(
                       width: 350,
@@ -121,11 +126,11 @@ class _SignInViewState extends State<SignInView> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return HomeView();
+                            return NavBar();
                           }));
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 255, 79, 50),
+                          primary: AppColor.mainColor,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                         ),
@@ -165,7 +170,7 @@ class _SignInViewState extends State<SignInView> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return HomeView();
+                              return NavBar();
                             }));
                           },
                           style: ElevatedButton.styleFrom(
@@ -194,6 +199,9 @@ class _SignInViewState extends State<SignInView> {
                             ],
                           )),
                     ),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ],

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_Up/views/sign_up_view.dart';
+import 'package:planet_pets_app/app/modules/home/views/user.dart';
+import 'package:planet_pets_app/utils/colors.dart';
 
 import '../controllers/sign_up_sign_in_controller.dart';
 
@@ -10,7 +12,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 29, 34, 52),
+      backgroundColor: AppColor.bgColor1,
       body: SafeArea(
         child: Column(
           children: [
@@ -30,10 +32,10 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                   children: [
                     TextSpan(
                         text: 'PLANET ',
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 255, 79, 50))),
+                        style: TextStyle(color: AppColor.mainColor)),
                     TextSpan(
-                        text: 'PETS', style: TextStyle(color: Colors.white)),
+                        text: 'PETS',
+                        style: TextStyle(color: AppColor.blankColor)),
                   ]),
             ),
             SizedBox(
@@ -50,10 +52,10 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                   }));
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 29, 34, 52),
+                    primary: AppColor.bgColor1,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    side: BorderSide(width: 2.0, color: Colors.white)),
+                    side: BorderSide(width: 2.0, color: AppColor.blankColor)),
                 child: Text(
                   "Sign Up",
                   style: TextStyle(
@@ -77,7 +79,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                   }));
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 255, 79, 50),
+                  primary: AppColor.mainColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
                 ),
