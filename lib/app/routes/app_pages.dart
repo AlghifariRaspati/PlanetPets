@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../modules/Intro/bindings/intro_binding.dart';
 import '../modules/Intro/views/intro_view.dart';
 import '../modules/Options/bindings/options_binding.dart';
@@ -11,6 +12,8 @@ import '../modules/Sign_Up/bindings/sign_up_binding.dart';
 import '../modules/Sign_Up/views/sign_up_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
 
 part 'app_routes.dart';
 
@@ -49,6 +52,11 @@ class AppPages {
       name: _Paths.OPTIONS,
       page: () => OptionsView(),
       binding: OptionsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PROFILE,
+      page: () => ProfileView(),
+      binding: ProfileBinding(),
     ),
   ];
 }

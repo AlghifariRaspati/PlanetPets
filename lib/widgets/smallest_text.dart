@@ -1,17 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-// ignore: must_be_immutable
-class MediumText extends StatelessWidget {
+class SmallestText extends StatelessWidget {
   final Color? color;
   final String text;
   double size;
   double height;
 
-  MediumText(
+  SmallestText(
       {Key? key,
       this.color = const Color(0xFF000000),
       required this.text,
-      this.size = 16,
+      this.size = 10,
       this.height = 1.2})
       : super(key: key);
 
