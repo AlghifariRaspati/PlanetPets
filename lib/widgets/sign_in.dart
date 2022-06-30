@@ -1,12 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_In/views/forgot_pass_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
+import 'package:planet_pets_app/provider/google_sign_in.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/main.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
+import 'package:planet_pets_app/widgets/medium_text.dart';
+import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 import 'package:planet_pets_app/widgets/utils.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -16,6 +22,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  bool isGmailVerified = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -23,6 +30,8 @@ class _SignInState extends State<SignIn> {
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+
+    super.dispose();
   }
 
   bool _isObscure = true;
@@ -39,7 +48,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width30),
                 child: Column(
                   children: [
                     Container(
@@ -50,23 +59,23 @@ class _SignInState extends State<SignIn> {
                                     color: AppColor.mainColor,
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins-Bold',
-                                    fontSize: 30),
+                                    fontSize: Dimensions.font30),
                                 children: [
-                              TextSpan(text: "Sign In\n"),
+                              const TextSpan(text: "Sign In\n"),
                               TextSpan(
                                   text: "Sign in with your Email and Password",
                                   style: TextStyle(
                                       fontFamily: "Poppins",
-                                      fontSize: 16,
+                                      fontSize: Dimensions.font16,
                                       color: Colors.white,
                                       fontWeight: FontWeight.normal)),
                             ]))),
                     SizedBox(
-                      height: 30,
+                      height: Dimensions.height30,
                     ),
                     Column(
                       children: [
-                        TextField(
+                        TextFormField(
                           controller: emailController,
                           style: TextStyle(height: 0.7),
                           decoration: InputDecoration(
@@ -74,7 +83,8 @@ class _SignInState extends State<SignIn> {
                               hintText: "Email",
                               fillColor: Color.fromARGB(255, 233, 233, 233),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20),
                                   borderSide: BorderSide(
                                     width: 0,
                                     style: BorderStyle.none,
@@ -83,11 +93,11 @@ class _SignInState extends State<SignIn> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: Dimensions.height20,
                     ),
                     Column(
                       children: [
-                        TextField(
+                        TextFormField(
                           controller: passwordController,
                           style: TextStyle(height: 0.7),
                           obscureText: _isObscure,
@@ -96,7 +106,8 @@ class _SignInState extends State<SignIn> {
                               filled: true,
                               fillColor: Color.fromARGB(255, 233, 233, 233),
                               border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20),
                                   borderSide: BorderSide(
                                     width: 0,
                                     style: BorderStyle.none,
@@ -115,7 +126,7 @@ class _SignInState extends State<SignIn> {
                               )),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: Dimensions.height10,
                         ),
                         Container(
                             alignment: Alignment.centerRight,
@@ -129,61 +140,67 @@ class _SignInState extends State<SignIn> {
                               child: Text(
                                 "Forgot Password?",
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 79, 50),
+                                    color: AppColor.mainColor,
                                     fontFamily: "Poppins"),
                               ),
                             )),
                         SizedBox(
-                          height: 10,
+                          height: Dimensions.height10,
                         ),
                         Container(
-                          width: 350,
-                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          height: Dimensions.height50,
                           child: ElevatedButton(
                             onPressed: signIn,
                             style: ElevatedButton.styleFrom(
                               primary: AppColor.mainColor,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius20)),
                             ),
                             child: Text(
                               "Sign In",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontFamily: 'Poppins',
-                                  fontSize: 16),
+                                  fontSize: Dimensions.font16),
                             ),
                           ),
                         ),
-                        SizedBox(height: 10),
+                        SizedBox(height: Dimensions.height10),
                         Row(children: <Widget>[
                           Expanded(
                               child: Divider(
-                            color: Colors.white.withOpacity(0.5),
+                            color: AppColor.blankColor.withOpacity(0.5),
                           )),
                           Text(
                             " OR ",
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.5),
+                              color: AppColor.blankColor.withOpacity(0.5),
                             ),
                           ),
                           Expanded(
                               child: Divider(
-                            color: Colors.white.withOpacity(0.5),
+                            color: AppColor.blankColor.withOpacity(0.5),
                           )),
                         ]),
                         SizedBox(
-                          height: 10,
+                          height: Dimensions.height10,
                         ),
                         Container(
-                          width: 350,
-                          height: 50,
+                          width: MediaQuery.of(context).size.width,
+                          height: Dimensions.height50,
                           child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return NavBar();
-                                }));
+                                final provider =
+                                    Provider.of<GoogleSignInProvider>(context,
+                                        listen: false);
+                                provider.googleLogin();
+                                // .then((value) =>
+                                //     Navigator.of(context).pushReplacement(
+                                //         MaterialPageRoute(
+                                //             builder: (context) =>
+                                //                 const NavBar())));
                               },
                               style: ElevatedButton.styleFrom(
                                 primary: Colors.white,
@@ -193,13 +210,13 @@ class _SignInState extends State<SignIn> {
                               child: Row(
                                 children: [
                                   SizedBox(
-                                    height: 25,
-                                    width: 25,
+                                    height: Dimensions.height25,
+                                    width: Dimensions.width25,
                                     child: Image.asset(
                                       "assets/images/google_icon.png",
                                     ),
                                   ),
-                                  SizedBox(width: 40),
+                                  SizedBox(width: Dimensions.height40),
                                   Text(
                                     "Continue with google",
                                     style: TextStyle(
@@ -207,13 +224,13 @@ class _SignInState extends State<SignIn> {
                                             Color.fromARGB(255, 201, 201, 201),
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Poppins',
-                                        fontSize: 16),
+                                        fontSize: Dimensions.font16),
                                   ),
                                 ],
                               )),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: Dimensions.height20,
                         )
                       ],
                     ),
@@ -228,7 +245,7 @@ class _SignInState extends State<SignIn> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
               child: CircularProgressIndicator(),
             ));
     try {
@@ -236,10 +253,12 @@ class _SignInState extends State<SignIn> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
-      print(e);
+      print(e.toString());
 
       Utils.showSnackBar(e.message);
     }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    navigatorKey.currentState!.pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => NavBar()),
+        (Route<dynamic> route) => false);
   }
 }

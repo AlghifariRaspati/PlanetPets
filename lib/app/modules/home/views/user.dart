@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/Options/views/options_view.dart';
+import 'package:planet_pets_app/app/modules/home/views/help.dart';
+import 'package:planet_pets_app/app/modules/home/views/history.dart';
 import 'package:planet_pets_app/app/modules/profile/views/profile_view.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
@@ -26,30 +29,47 @@ class _UserViewState extends State<UserView> {
                 clipBehavior: Clip.none,
                 children: [
                   Container(
-                    height: 150,
+                    height: Dimensions.top150,
                     color: AppColor.bgColor1,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
+                    padding: EdgeInsets.symmetric(
+                        vertical: Dimensions.height10,
+                        horizontal: Dimensions.width10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        SizedBox(
-                          child: Icon(
-                            Icons.receipt_long_outlined,
-                            color: AppColor.mainColor,
-                            size: 25,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return History();
+                            }));
+                          },
+                          child: SizedBox(
+                            child: Icon(
+                              Icons.receipt_long_outlined,
+                              color: AppColor.mainColor,
+                              size: Dimensions.icon25,
+                            ),
                           ),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: Dimensions.height15,
                         ),
-                        SizedBox(
-                          child: Icon(
-                            Icons.help_outline,
-                            color: AppColor.mainColor,
-                            size: 25,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Help();
+                            }));
+                          },
+                          child: SizedBox(
+                            child: Icon(
+                              Icons.help_outline,
+                              color: AppColor.mainColor,
+                              size: Dimensions.icon25,
+                            ),
                           ),
                         ),
                       ],
@@ -64,7 +84,7 @@ class _UserViewState extends State<UserView> {
                 ],
               ),
               SizedBox(
-                height: 70,
+                height: Dimensions.height80,
               ),
               Align(
                 alignment: Alignment.center,
@@ -103,31 +123,28 @@ class _UserViewState extends State<UserView> {
                       ],
                     ),
                     SizedBox(
-                      height: 20,
+                      height: Dimensions.height20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Dimensions.height30),
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 55,
+                        height: Dimensions.height50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return UserView();
-                            }));
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 255, 79, 50),
+                            primary: AppColor.mainColor,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius20)),
                           ),
                           child: Text(
                             "Open Store",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins',
-                                fontSize: 16),
+                                fontSize: Dimensions.font16),
                           ),
                         ),
                       ),

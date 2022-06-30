@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:planet_pets_app/app/modules/home/views/location.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/card.dart';
 
 import 'package:planet_pets_app/widgets/medium_text.dart';
@@ -23,13 +25,16 @@ class _HomeViewState extends State<HomeView> {
       backgroundColor: AppColor.bgColor2,
       body: SafeArea(
         child: SingleChildScrollView(
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           child: Column(
             children: [
               Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                    margin: EdgeInsets.symmetric(vertical: Dimensions.height10),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -38,11 +43,11 @@ class _HomeViewState extends State<HomeView> {
                               Container(
                                 child:
                                     Image.asset("assets/images/UserIcon.png"),
-                                width: 40,
-                                height: 40,
+                                width: Dimensions.height40,
+                                height: Dimensions.width40,
                               ),
                               SizedBox(
-                                width: 10,
+                                width: Dimensions.width10,
                               ),
                               SemiBigText(
                                 text: 'Hi, User',
@@ -51,45 +56,55 @@ class _HomeViewState extends State<HomeView> {
                             ],
                           ),
                           //
-                          Row(
-                            children: [
-                              MediumText(
-                                text: "Cijagra",
-                                color: AppColor.mainBlackColor,
-                              ),
-                              Icon(
-                                Icons.location_on_rounded,
-                                color: AppColor.mainColor,
-                              )
-                            ],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Location()),
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                MediumText(
+                                  text: "Cijagra",
+                                  color: AppColor.mainBlackColor,
+                                ),
+                                Icon(
+                                  Icons.location_on_rounded,
+                                  color: AppColor.mainColor,
+                                )
+                              ],
+                            ),
                           )
                         ]),
                   ),
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               Container(
-                padding: EdgeInsets.only(left: 10, right: 10),
-                width: 350,
-                height: 50,
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+                width: MediaQuery.of(context).size.width,
+                height: Dimensions.height50,
                 child: TextField(
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       hintText: "Search....",
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius16),
                         borderSide: BorderSide(
                             color: AppColor.mainBlackColor, width: 2),
                       )),
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: Dimensions.height40,
               ),
               Container(
-                padding: EdgeInsets.only(left: 30, right: 30),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -107,7 +122,7 @@ class _HomeViewState extends State<HomeView> {
                     ]),
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               Container(
                 child: Row(
@@ -118,11 +133,12 @@ class _HomeViewState extends State<HomeView> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                            height: 40,
-                            width: 40,
+                            height: Dimensions.height40,
+                            width: Dimensions.width40,
                             decoration: BoxDecoration(
                                 color: AppColor.bgColor1,
-                                borderRadius: BorderRadius.circular(8)),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius8)),
                             child: Icon(
                               Icons.star_border_outlined,
                               color: AppColor.mainColor,
@@ -143,11 +159,12 @@ class _HomeViewState extends State<HomeView> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                              height: 40,
-                              width: 40,
+                              height: Dimensions.height40,
+                              width: Dimensions.height40,
                               decoration: BoxDecoration(
                                   color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(8)),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius8)),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.asset("assets/images/Cat.png"),
@@ -167,18 +184,19 @@ class _HomeViewState extends State<HomeView> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                              height: 40,
-                              width: 40,
+                              height: Dimensions.height40,
+                              width: Dimensions.height40,
                               decoration: BoxDecoration(
                                   color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(8)),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius8)),
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Image.asset("assets/images/Dog.png"),
                               )),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: Dimensions.height5,
                         ),
                         MediumText(
                           text: "Dog",
@@ -191,18 +209,19 @@ class _HomeViewState extends State<HomeView> {
                         GestureDetector(
                           onTap: () {},
                           child: Container(
-                              height: 40,
-                              width: 40,
+                              height: Dimensions.height40,
+                              width: Dimensions.width40,
                               decoration: BoxDecoration(
                                   color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(8)),
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.radius8)),
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Image.asset("assets/images/Fish.png"),
                               )),
                         ),
                         SizedBox(
-                          height: 5,
+                          height: Dimensions.height5,
                         ),
                         MediumText(
                           text: "Fish",
@@ -214,10 +233,10 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
+                margin: EdgeInsets.symmetric(horizontal: Dimensions.width20),
                 height: MediaQuery.of(context).size.height * 0.75,
                 child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -227,8 +246,8 @@ class _HomeViewState extends State<HomeView> {
                         title: "Dog Toy",
                         price: "IDR 100.000"),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
+                        mainAxisSpacing: Dimensions.height20,
+                        crossAxisSpacing: Dimensions.width20,
                         crossAxisCount: 2)),
               ),
             ],

@@ -7,6 +7,7 @@ import 'package:planet_pets_app/app/modules/Intro/views/intro_screen3.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/routes/app_pages.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -55,9 +56,9 @@ class _IntroViewState extends State<IntroView> {
                   count: 3,
                   effect: ExpandingDotsEffect(
                       activeDotColor: AppColor.mainColor,
-                      dotColor: Color.fromARGB(255, 199, 185, 185),
-                      dotHeight: 8.0,
-                      dotWidth: 12.0),
+                      dotColor: AppColor.bgColor2,
+                      dotHeight: Dimensions.height8,
+                      dotWidth: Dimensions.width12),
                 ),
                 onLastPage
                     ? GestureDetector(

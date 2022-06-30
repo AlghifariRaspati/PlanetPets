@@ -8,10 +8,14 @@ import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
 import 'package:planet_pets_app/app/routes/app_pages.dart';
+import 'package:planet_pets_app/provider/google_sign_in.dart';
 import 'package:planet_pets_app/utils/colors.dart';
-import 'package:planet_pets_app/widgets/Medium_Text.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
+
+import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
-import 'package:planet_pets_app/wrapper.dart';
+
+import 'package:provider/provider.dart';
 
 import '../controllers/options_controller.dart';
 
@@ -21,11 +25,12 @@ class OptionsView extends GetView<OptionsController> {
     final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100),
+          preferredSize: Size.fromHeight(Dimensions.top100),
           child: SafeArea(
             child: AppBar(
               centerTitle: false,
-              iconTheme: IconThemeData(color: AppColor.mainColor, size: 35),
+              iconTheme: IconThemeData(
+                  color: AppColor.mainColor, size: Dimensions.icon35),
               backgroundColor: AppColor.bgColor1,
               elevation: 0,
               title: Transform(
@@ -46,7 +51,7 @@ class OptionsView extends GetView<OptionsController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: EdgeInsets.symmetric(vertical: 5),
+            margin: EdgeInsets.symmetric(vertical: Dimensions.height5),
             child: Column(
               children: [
                 TextButton(
@@ -56,7 +61,7 @@ class OptionsView extends GetView<OptionsController> {
                       style: TextStyle(
                           color: AppColor.mainBlackColor.withOpacity(0.7),
                           fontWeight: FontWeight.w700,
-                          fontSize: 16),
+                          fontSize: Dimensions.font16),
                     )),
                 Divider(
                   height: 1,
@@ -69,7 +74,7 @@ class OptionsView extends GetView<OptionsController> {
                       style: TextStyle(
                           color: AppColor.mainBlackColor.withOpacity(0.7),
                           fontWeight: FontWeight.w700,
-                          fontSize: 16),
+                          fontSize: Dimensions.font16),
                     )),
                 Divider(
                   height: 1,
@@ -79,33 +84,61 @@ class OptionsView extends GetView<OptionsController> {
             ),
           ),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            height: 50,
-            width: 200,
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimensions.width100,
+            ),
+            margin: EdgeInsets.only(bottom: Dimensions.height20),
+            height: Dimensions.height50,
+            width: MediaQuery.of(context).size.width,
             child: ElevatedButton(
-                // onPressed: () => FirebaseAuth.instance.signOut(),
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut().then((value) =>
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => Wrapper()),
-                          (route) => false));
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            content: MediumText(
+                                text: "are you sure you want to log out?"),
+                            actions: [
+                              TextButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: SemiBigText(
+                                    text: "Cancel",
+                                  )),
+                              TextButton(
+                                  onPressed: () {
+                                    final provider =
+                                        Provider.of<GoogleSignInProvider>(
+                                            context,
+                                            listen: false);
+                                    provider.logout().then((value) =>
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignUpSignInView()),
+                                                (route) => false));
+                                  },
+                                  child: SemiBigText(
+                                    text: "Yes",
+                                  ))
+                            ],
+                          ));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: AppColor.bgColor2,
                   shadowColor: AppColor.mainBlackColor.withOpacity(0.1),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+                      borderRadius: BorderRadius.circular(Dimensions.radius16)),
                 ),
                 child: Row(
                   children: [
                     SizedBox(
-                        height: 25,
-                        width: 25,
+                        height: Dimensions.height25,
+                        width: Dimensions.width25,
                         child: Icon(
                           Icons.logout_outlined,
                           color: AppColor.mainBlackColor,
                         )),
-                    SizedBox(width: 40),
+                    SizedBox(width: Dimensions.width40),
                     MediumText(
                       text: "Log Out",
                       color: AppColor.mainBlackColor.withOpacity(0.7),

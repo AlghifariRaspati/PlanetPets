@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:planet_pets_app/app/modules/home/views/chat.dart';
 import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 
 import 'favorite.dart';
 import 'home_view.dart';
@@ -32,13 +34,14 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: _pages[_selectedIndex],
       extendBody: true,
       bottomNavigationBar: DotNavigationBar(
           curve: Curves.easeOut,
           duration: Duration(milliseconds: 500),
-          borderRadius: 20,
+          borderRadius: Dimensions.radius20,
           dotIndicatorColor: AppColor.bgColor1,
           backgroundColor: AppColor.bgColor1,
           currentIndex: _selectedIndex,

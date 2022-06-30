@@ -5,6 +5,7 @@ import 'package:planet_pets_app/app/modules/Options/views/options_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:planet_pets_app/widgets/small_text.dart';
@@ -27,12 +28,12 @@ class ProfileView extends GetView<ProfileController> {
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      height: 150,
+                      height: Dimensions.top150,
                       color: AppColor.bgColor1,
                     ),
                     AppBar(
-                      iconTheme:
-                          IconThemeData(color: AppColor.mainColor, size: 35),
+                      iconTheme: IconThemeData(
+                          color: AppColor.mainColor, size: Dimensions.icon35),
                       backgroundColor: AppColor.bgColor1,
                       elevation: 0,
                     ),
@@ -45,14 +46,14 @@ class ProfileView extends GetView<ProfileController> {
                   ],
                 ),
                 SizedBox(
-                  height: 70,
+                  height: Dimensions.height70,
                 ),
                 Align(
                   alignment: Alignment.center,
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 10,
+                        height: Dimensions.height10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,10 +67,11 @@ class ProfileView extends GetView<ProfileController> {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: Dimensions.height20,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width30),
                         child: Column(
                           children: [
                             TextField(
@@ -109,10 +111,10 @@ class ProfileView extends GetView<ProfileController> {
               ],
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
+              margin: EdgeInsets.symmetric(vertical: Dimensions.height20),
               child: SizedBox(
-                width: 130,
-                height: 50,
+                width: Dimensions.width130,
+                height: Dimensions.height50,
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(context,
@@ -123,7 +125,8 @@ class ProfileView extends GetView<ProfileController> {
                     style: ElevatedButton.styleFrom(
                       primary: AppColor.bgColor1,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20)),
                     ),
                     child: MediumText(
                       text: "Save",

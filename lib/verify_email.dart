@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:planet_pets_app/widgets/utils.dart';
@@ -62,7 +63,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
   Widget build(BuildContext context) => isEmailVerified
       ? NavBar()
       : Scaffold(
-          backgroundColor: AppColor.bgColor2,
+          backgroundColor: AppColor.bgColor1,
           appBar: AppBar(
             backgroundColor: AppColor.bgColor1,
             title: Text(
@@ -71,18 +72,22 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   TextStyle(color: AppColor.mainColor, fontFamily: "Poppins"),
             ),
             elevation: 0,
-            iconTheme: IconThemeData(color: AppColor.mainColor, size: 35),
+            iconTheme: IconThemeData(
+                color: AppColor.mainColor, size: Dimensions.icon35),
           ),
           body: SafeArea(
             child: Container(
-              margin: EdgeInsets.only(left: 70),
+              margin: EdgeInsets.only(left: Dimensions.width50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: Dimensions.width20,
+                        vertical: Dimensions.height10),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius16),
                         color: AppColor.bgColor1),
                     child: SemiBigText(
                       text: "Your verification\n email has been sent",

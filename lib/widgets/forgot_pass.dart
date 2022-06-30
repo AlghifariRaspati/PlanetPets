@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/main.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/big_text.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
@@ -34,13 +35,14 @@ class _ForgotPassState extends State<ForgotPass> {
             text: "Reset Password",
             color: AppColor.mainColor,
           ),
-          iconTheme: IconThemeData(color: AppColor.mainColor, size: 35),
+          iconTheme:
+              IconThemeData(color: AppColor.mainColor, size: Dimensions.icon35),
         ),
         body: Center(
           child: SafeArea(
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(left: 50, right: 50),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width50),
                 child: Column(
                   children: [
                     SemiBigText(
@@ -48,10 +50,10 @@ class _ForgotPassState extends State<ForgotPass> {
                       color: AppColor.mainColor,
                     ),
                     SizedBox(
-                      height: 40,
+                      height: Dimensions.height40,
                     ),
                     TextFormField(
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: AppColor.blankColor),
                       controller: emailController,
                       cursorColor: AppColor.blankColor,
                       textInputAction: TextInputAction.done,
@@ -68,17 +70,18 @@ class _ForgotPassState extends State<ForgotPass> {
                               : null,
                     ),
                     SizedBox(
-                      height: 20,
+                      height: Dimensions.height20,
                     ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                          minimumSize: Size.fromHeight(50),
+                          minimumSize: Size.fromHeight(Dimensions.height50),
                           primary: AppColor.mainColor),
                       onPressed: resetPassword,
                       icon: Icon(Icons.email_outlined),
                       label: Text(
                         "Reset Password",
-                        style: TextStyle(fontSize: 24, fontFamily: 'Poppins'),
+                        style: TextStyle(
+                            fontSize: Dimensions.font24, fontFamily: 'Poppins'),
                       ),
                     )
                   ],
@@ -92,9 +95,7 @@ class _ForgotPassState extends State<ForgotPass> {
     showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
-              child: CircularProgressIndicator(),
-            ));
+        builder: (context) => Center(child: CircularProgressIndicator()));
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(
         email: emailController.text.trim(),

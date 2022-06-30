@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
   final Color? color;
@@ -20,7 +21,7 @@ class BigText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontFamily: "Poppins",
-        fontSize: size,
+        fontSize: size == 0 ? Dimensions.font24 : size,
         fontWeight: FontWeight.w400,
       ),
     );

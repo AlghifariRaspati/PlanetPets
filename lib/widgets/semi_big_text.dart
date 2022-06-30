@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 
 class SemiBigText extends StatelessWidget {
   final Color? color;
@@ -9,7 +10,7 @@ class SemiBigText extends StatelessWidget {
     Key? key,
     this.color = const Color(0xFFE15a0c),
     required this.text,
-    this.size = 20,
+    this.size = 0,
   }) : super(key: key);
 
   @override
@@ -20,7 +21,7 @@ class SemiBigText extends StatelessWidget {
       style: TextStyle(
           color: color,
           fontFamily: "Poppins",
-          fontSize: size,
+          fontSize: size == 0 ? Dimensions.font20 : size,
           fontWeight: FontWeight.w700),
     );
   }

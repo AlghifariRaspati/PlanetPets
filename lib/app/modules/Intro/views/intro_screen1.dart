@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 
 class IntroPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 29, 34, 52),
+      color: AppColor.bgColor1,
       child: Column(
         children: [
           SizedBox(
@@ -14,7 +16,9 @@ class IntroPage1 extends StatelessWidget {
           Text(
             'Welcome to Planet Pets!,\n take a quick stroll to get\n familiar with our app',
             style: TextStyle(
-                color: Colors.white, fontFamily: 'Poppins', fontSize: 20),
+                color: AppColor.blankColor,
+                fontFamily: 'Poppins',
+                fontSize: Dimensions.font20),
             textAlign: TextAlign.center,
           )
         ],

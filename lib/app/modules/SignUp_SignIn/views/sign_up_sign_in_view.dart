@@ -5,6 +5,9 @@ import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_Up/views/sign_up_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
+import 'package:planet_pets_app/widgets/sign_in.dart';
+import 'package:planet_pets_app/widgets/sign_up.dart';
 
 import '../controllers/sign_up_sign_in_controller.dart';
 
@@ -28,7 +31,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                 text: TextSpan(
                     style: TextStyle(
                         fontFamily: 'Poppins-Bold',
-                        fontSize: 30,
+                        fontSize: Dimensions.font30,
                         fontWeight: FontWeight.bold),
                     children: [
                       TextSpan(
@@ -40,58 +43,60 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
                     ]),
               ),
               SizedBox(
-                height: 150,
+                height: Dimensions.top150,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                width: 350,
-                height: 55,
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width30),
+                width: MediaQuery.of(context).size.width,
+                height: Dimensions.height50,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SignInView();
+                      return SignIn();
                     }));
                   },
                   style: ElevatedButton.styleFrom(
                     primary: AppColor.mainColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.radius20)),
                   ),
                   child: Text(
                     "Sign In",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
-                        fontSize: 16),
+                        fontSize: Dimensions.font16),
                   ),
                 ),
               ),
               SizedBox(
-                height: 30,
+                height: Dimensions.height30,
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 30),
-                width: 350,
-                height: 55,
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width30),
+                width: MediaQuery.of(context).size.width,
+                height: Dimensions.height50,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SignUpView();
+                      return SignUp();
                     }));
                   },
                   style: ElevatedButton.styleFrom(
                       primary: AppColor.bgColor1,
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20)),
                       side: BorderSide(width: 2.0, color: AppColor.blankColor)),
                   child: Text(
                     "Sign Up",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Poppins',
-                        fontSize: 16),
+                        fontSize: Dimensions.font16),
                   ),
                 ),
               ),
