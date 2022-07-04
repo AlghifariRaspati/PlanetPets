@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 class ChatView extends StatefulWidget {
@@ -19,11 +20,12 @@ class _ChatState extends State<ChatView> {
           child: Column(
             children: [
               Container(
-                  height: 150,
+                  height: Dimensions.top130,
                   color: AppColor.bgColor1,
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    padding: EdgeInsets.only(top: 20),
+                    margin:
+                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
+                    padding: EdgeInsets.only(top: Dimensions.height20),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

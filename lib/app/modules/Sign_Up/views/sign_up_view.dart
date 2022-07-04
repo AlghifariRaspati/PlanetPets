@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/home_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
@@ -26,13 +27,13 @@ class SignUpView extends StatelessWidget {
                   color: AppColor.mainColor,
                 ));
               } else if (snapshot.hasData) {
-                return VerifyEmail();
+                return SignUp();
               } else if (snapshot.hasError) {
                 return Center(
                     child: Text("Something Went Wrong",
                         style: TextStyle(color: Colors.red)));
               } else {
-                return SignUpSignInView();
+                return VerifyEmail();
               }
             }),
       );

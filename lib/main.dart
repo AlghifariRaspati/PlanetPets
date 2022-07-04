@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/bindings/sign_up_sign_in_binding.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
-import 'package:planet_pets_app/provider/google_sign_in.dart';
+import 'package:planet_pets_app/auth_service.dart';
+
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/verify_email.dart';
 import 'package:planet_pets_app/widgets/sign_in.dart';
@@ -24,16 +25,13 @@ Future main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(
-      ChangeNotifierProvider(
-        create: (context) => GoogleSignInProvider(),
-        child: GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Application",
-          getPages: AppPages.routes,
-          home: SignUpSignInView(),
-          navigatorKey: navigatorKey,
-          scaffoldMessengerKey: Utils.messengerKey,
-        ),
+      GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Application",
+        getPages: AppPages.routes,
+        home: const AuthChecker(),
+        navigatorKey: navigatorKey,
+        scaffoldMessengerKey: Utils.messengerKey,
       ),
     );
   });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
-import 'package:planet_pets_app/provider/google_sign_in.dart';
+
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/main.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
@@ -63,6 +63,17 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       SizedBox(
                         height: Dimensions.height10,
+                      ),
+                      Text(
+                        "Sign Up",
+                        style: TextStyle(
+                            color: AppColor.mainColor,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Poppins-Bold',
+                            fontSize: Dimensions.font30),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height40,
                       ),
                       Form(
                         key: formKey,
@@ -140,7 +151,29 @@ class _SignUpState extends State<SignUp> {
                         ),
                       ),
                       SizedBox(
-                        height: Dimensions.height40,
+                        height: Dimensions.height15,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: RichText(
+                            text: TextSpan(
+                                text: "Already have an account? ",
+                                style: TextStyle(
+                                    fontSize: Dimensions.font12,
+                                    fontFamily: "Poppins",
+                                    color: AppColor.mainBlackColor
+                                        .withOpacity(0.7)),
+                                children: [
+                              TextSpan(
+                                  text: "Sign In",
+                                  style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColor.mainColor))
+                            ])),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height15,
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
@@ -159,62 +192,6 @@ class _SignUpState extends State<SignUp> {
                             )),
                       ),
                       SizedBox(height: Dimensions.height10),
-                      Row(children: <Widget>[
-                        Expanded(
-                            child: Divider(
-                          thickness: 1,
-                        )),
-                        Text(
-                          " OR ",
-                          style: TextStyle(
-                            color: AppColor.mainBlackColor.withOpacity(0.2),
-                          ),
-                        ),
-                        Expanded(
-                            child: Divider(
-                          thickness: 1,
-                        )),
-                      ]),
-                      SizedBox(height: Dimensions.height10),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: Dimensions.height50,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              final provider =
-                                  Provider.of<GoogleSignInProvider>(context,
-                                      listen: false);
-                              provider.googleLogin().then((value) =>
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) => NavBar()),
-                                      (route) => false));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  height: Dimensions.height25,
-                                  width: Dimensions.width25,
-                                  child: Image.asset(
-                                    "assets/images/google_icon.png",
-                                  ),
-                                ),
-                                SizedBox(width: Dimensions.width40),
-                                MediumText(
-                                  text: "Continue With Google",
-                                  color: AppColor.googleColor,
-                                )
-                              ],
-                            )),
-                      ),
-                      SizedBox(
-                        height: Dimensions.height20,
-                      )
                     ],
                   ),
                 ),
@@ -241,9 +218,6 @@ class _SignUpState extends State<SignUp> {
 
       Utils.showSnackBar(e.message);
     }
-    navigatorKey.currentState!.pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => NavBar()),
-        (Route<dynamic> route) => false);
-    ;
+    navigatorKey.currentState!.popUntil(((route) => route.isFirst));
   }
 }

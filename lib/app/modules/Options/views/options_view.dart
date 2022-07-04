@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
 import 'package:planet_pets_app/app/routes/app_pages.dart';
-import 'package:planet_pets_app/provider/google_sign_in.dart';
+import 'package:planet_pets_app/auth_service.dart';
+
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 
@@ -89,7 +90,7 @@ class OptionsView extends GetView<OptionsController> {
             ),
             margin: EdgeInsets.only(bottom: Dimensions.height20),
             height: Dimensions.height50,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width / 1.2,
             child: ElevatedButton(
                 onPressed: () {
                   showDialog(
@@ -105,17 +106,7 @@ class OptionsView extends GetView<OptionsController> {
                                   )),
                               TextButton(
                                   onPressed: () {
-                                    final provider =
-                                        Provider.of<GoogleSignInProvider>(
-                                            context,
-                                            listen: false);
-                                    provider.logout().then((value) =>
-                                        Navigator.of(context)
-                                            .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SignUpSignInView()),
-                                                (route) => false));
+                                    AuthService().signOut(context);
                                   },
                                   child: SemiBigText(
                                     text: "Yes",
@@ -138,7 +129,7 @@ class OptionsView extends GetView<OptionsController> {
                           Icons.logout_outlined,
                           color: AppColor.mainBlackColor,
                         )),
-                    SizedBox(width: Dimensions.width40),
+                    SizedBox(width: Dimensions.width10),
                     MediumText(
                       text: "Log Out",
                       color: AppColor.mainBlackColor.withOpacity(0.7),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 import 'package:planet_pets_app/utils/colors.dart';
@@ -28,7 +29,7 @@ class SignInView extends StatelessWidget {
                     child: Text("Something Went Wrong",
                         style: TextStyle(color: Colors.red)));
               } else {
-                return SignUpSignInView();
+                return SignIn();
               }
             }),
       );

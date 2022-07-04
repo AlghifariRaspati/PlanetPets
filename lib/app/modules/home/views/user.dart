@@ -57,26 +57,11 @@ class _UserViewState extends State<UserView> {
                         SizedBox(
                           width: Dimensions.height15,
                         ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return Help();
-                            }));
-                          },
-                          child: SizedBox(
-                            child: Icon(
-                              Icons.help_outline,
-                              color: AppColor.mainColor,
-                              size: Dimensions.icon25,
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                   Positioned.fill(
-                    bottom: -150,
+                    top: Dimensions.height30,
                     child: Align(
                         alignment: Alignment.center,
                         child: Image.asset('assets/images/UserIcon.png')),
@@ -84,7 +69,7 @@ class _UserViewState extends State<UserView> {
                 ],
               ),
               SizedBox(
-                height: Dimensions.height80,
+                height: Dimensions.height25,
               ),
               Align(
                 alignment: Alignment.center,

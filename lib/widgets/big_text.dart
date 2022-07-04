@@ -22,7 +22,7 @@ class BigText extends StatelessWidget {
         color: color,
         fontFamily: "Poppins",
         fontSize: size == 0 ? Dimensions.font24 : size,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.bold,
       ),
     );
   }

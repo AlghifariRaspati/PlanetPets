@@ -27,7 +27,7 @@ class _LocationState extends State<Location> {
                 title: Transform(
                     transform: Matrix4.translationValues(-20.0, 0.0, 0.0),
                     child: SemiBigText(
-                      text: "Favorite",
+                      text: "Location",
                       color: AppColor.mainColor,
                     )),
                 flexibleSpace: Container(
