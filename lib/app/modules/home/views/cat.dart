@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:planet_pets_app/utils/colors.dart';
-import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
-class Popular extends StatefulWidget {
-  const Popular({Key? key}) : super(key: key);
+import '../../../../utils/colors.dart';
+import '../../../../utils/dimensions.dart';
+import '../../../../widgets/semi_big_text.dart';
+
+class Cat extends StatefulWidget {
+  const Cat({Key? key}) : super(key: key);
 
   @override
-  State<Popular> createState() => _PopularState();
+  State<Cat> createState() => _CatState();
 }
 
-class _PopularState extends State<Popular> {
+class _CatState extends State<Cat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class _PopularState extends State<Popular> {
                 title: Transform(
                     transform: Matrix4.translationValues(-20.0, 0.0, 0.0),
                     child: SemiBigText(
-                      text: "Popular",
+                      text: "Cat",
                       color: AppColor.mainColor,
                     )),
                 flexibleSpace: Container(

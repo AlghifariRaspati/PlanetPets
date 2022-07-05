@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
-import 'package:planet_pets_app/app/modules/Sign_Up/views/sign_up_view.dart';
-import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/auth_service.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';

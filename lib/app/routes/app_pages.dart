@@ -14,6 +14,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/store_home.dart/bindings/store_home_dart_binding.dart';
+import '../modules/store_home.dart/views/store_home_dart_view.dart';
 
 part 'app_routes.dart';
 
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.STORE_HOME_DART,
+      page: () => StoreHomeDartView(),
+      binding: StoreHomeDartBinding(),
     ),
   ];
 }

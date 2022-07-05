@@ -1,23 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:planet_pets_app/app/modules/home/views/cat.dart';
+import 'package:planet_pets_app/app/modules/home/views/dog.dart';
+import 'package:planet_pets_app/app/modules/home/views/fish.dart';
 import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
 import 'package:planet_pets_app/app/modules/home/views/location.dart';
+import 'package:planet_pets_app/app/modules/home/views/bird.dart';
 import 'package:planet_pets_app/resources/database/database.dart';
 import 'package:planet_pets_app/resources/models/models.dart';
+import 'package:planet_pets_app/resources/models/usermodel.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/card.dart';
-
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -27,264 +27,303 @@ class _HomeViewState extends State<HomeView> {
   final user = FirebaseAuth.instance.currentUser!;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.bgColor2,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          physics:
-              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          child: Column(
-            children: [
-              Column(
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: Dimensions.width20),
-                    margin: EdgeInsets.symmetric(vertical: Dimensions.height10),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                child:
-                                    Image.asset("assets/images/UserIcon.png"),
-                                width: Dimensions.height40,
-                                height: Dimensions.width40,
-                              ),
-                              SizedBox(
-                                width: Dimensions.width10,
-                              ),
-                              RichText(
-                                  overflow: TextOverflow.fade,
-                                  text: TextSpan(
-                                      style: TextStyle(
-                                          color: AppColor.mainBlackColor
-                                              .withOpacity(0.7),
-                                          fontFamily: "Poppins",
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: Dimensions.font16),
-                                      children: [
-                                        const TextSpan(text: "Hello, "),
-                                        TextSpan(text: "User")
-                                      ])),
-                            ],
-                          ),
-                          //
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Location()),
-                              );
-                            },
-                            child: Row(
-                              children: [
-                                MediumText(
-                                  text: "Cijagra",
-                                  color: AppColor.mainBlackColor,
-                                ),
-                                Icon(
-                                  Icons.location_on_rounded,
-                                  color: AppColor.mainColor,
-                                )
-                              ],
-                            ),
-                          )
-                        ]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                width: MediaQuery.of(context).size.width,
-                height: Dimensions.height50,
-                child: TextField(
-                  decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "Search....",
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.radius16),
-                        borderSide: BorderSide(
-                            color: AppColor.mainBlackColor, width: 2),
-                      )),
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: Database().streamUser(),
+      builder:
+          (_, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+        if (!snapshot.hasData) {
+          return const Text("No data found");
+        } else {
+          List<DocumentSnapshot<Map<String, dynamic>>> docs =
+              snapshot.data!.docs;
+
+          return Scaffold(
+            backgroundColor: AppColor.bgColor2,
+            body: SafeArea(
+              child: Wrap(
+                children: List.generate(
+                  1,
+                  (index) {
+                    UserModels userModels = UserModels.formData(docs[index]);
+                    return _scaffold(context, userModels);
+                  },
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height40,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SemiBigText(
-                        text: "Categories",
-                        color: AppColor.mainBlackColor,
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: MediumText(
-                          text: "See all",
-                          color: AppColor.mainBlackColor,
-                        ),
-                      )
-                    ]),
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                            height: Dimensions.height40,
-                            width: Dimensions.width40,
-                            decoration: BoxDecoration(
-                                color: AppColor.bgColor1,
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius8)),
-                            child: Icon(
-                              Icons.star_border_outlined,
-                              color: AppColor.mainColor,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        MediumText(
-                          text: "Popular",
-                          color: AppColor.mainBlackColor.withOpacity(0.75),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                              height: Dimensions.height40,
-                              width: Dimensions.height40,
-                              decoration: BoxDecoration(
-                                  color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius8)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset("assets/images/Cat.png"),
-                              )),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        MediumText(
-                          text: "Cat",
-                          color: AppColor.mainBlackColor.withOpacity(0.75),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                              height: Dimensions.height40,
-                              width: Dimensions.height40,
-                              decoration: BoxDecoration(
-                                  color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius8)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Image.asset("assets/images/Dog.png"),
-                              )),
-                        ),
-                        SizedBox(
-                          height: Dimensions.height5,
-                        ),
-                        MediumText(
-                          text: "Dog",
-                          color: AppColor.mainBlackColor.withOpacity(0.75),
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Container(
-                              height: Dimensions.height40,
-                              width: Dimensions.width40,
-                              decoration: BoxDecoration(
-                                  color: AppColor.bgColor1,
-                                  borderRadius: BorderRadius.circular(
-                                      Dimensions.radius8)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset("assets/images/Fish.png"),
-                              )),
-                        ),
-                        SizedBox(
-                          height: Dimensions.height5,
-                        ),
-                        MediumText(
-                          text: "Fish",
-                          color: AppColor.mainBlackColor.withOpacity(0.75),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Dimensions.height20,
-              ),
-              StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: Database().streamCatalog(),
-                builder: (_,
-                    AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
-                        snapshot) {
-                  if (!snapshot.hasData) {
-                    return Container();
-                  } else {
-                    List<DocumentSnapshot<Map<String, dynamic>>> documents;
-                    documents = snapshot.data!.docs;
-
-                    return Wrap(
-                      children: List.generate(
-                        documents.length,
-                        (index) {
-                          DocumentSnapshot<Map<String, dynamic>> docs =
-                              documents[index];
-
-                          return _listCatalog(context, docs);
-                        },
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }
 
-Widget _listCatalog(
-    BuildContext context, DocumentSnapshot<Map<String, dynamic>> docs) {
+Widget _scaffold(BuildContext context, UserModels userModels) {
+  return SingleChildScrollView(
+    physics:
+        const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+    child: Column(
+      children: [
+        Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
+              margin: EdgeInsets.symmetric(vertical: Dimensions.height10),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          child: Image.asset("assets/images/UserIcon.png"),
+                          width: Dimensions.height40,
+                          height: Dimensions.width40,
+                        ),
+                        SizedBox(
+                          width: Dimensions.width10,
+                        ),
+                        RichText(
+                          overflow: TextOverflow.fade,
+                          text: TextSpan(
+                            style: TextStyle(
+                                color: AppColor.mainBlackColor.withOpacity(0.7),
+                                fontFamily: "Poppins",
+                                fontWeight: FontWeight.w700,
+                                fontSize: Dimensions.font16),
+                            children: [
+                              const TextSpan(text: "Hello, "),
+                              TextSpan(text: userModels.name)
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    //
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Location()),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          MediumText(
+                            text: "Cijagra",
+                            color: AppColor.mainBlackColor,
+                          ),
+                          Icon(
+                            Icons.location_on_rounded,
+                            color: AppColor.mainColor,
+                          )
+                        ],
+                      ),
+                    )
+                  ]),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Dimensions.height20,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
+          width: MediaQuery.of(context).size.width,
+          height: Dimensions.height50,
+          child: TextField(
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: "Search....",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(Dimensions.radius16),
+                  borderSide:
+                      BorderSide(color: AppColor.mainBlackColor, width: 2),
+                )),
+          ),
+        ),
+        SizedBox(
+          height: Dimensions.height40,
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: Dimensions.width20),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            SemiBigText(
+              text: "Categories",
+              color: AppColor.mainBlackColor,
+            ),
+          ]),
+        ),
+        SizedBox(
+          height: Dimensions.height20,
+        ),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Bird()));
+                    },
+                    child: Container(
+                      height: Dimensions.height40,
+                      width: Dimensions.width40,
+                      decoration: BoxDecoration(
+                          color: AppColor.bgColor1,
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius8)),
+                      child: Padding(
+                        padding: EdgeInsets.all(Dimensions.height8),
+                        child: Image.asset("assets/images/Bird.png"),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  MediumText(
+                    text: "Bird",
+                    color: AppColor.mainBlackColor.withOpacity(0.75),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Cat()));
+                    },
+                    child: Container(
+                        height: Dimensions.height40,
+                        width: Dimensions.height40,
+                        decoration: BoxDecoration(
+                            color: AppColor.bgColor1,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius8)),
+                        child: Padding(
+                          padding: EdgeInsets.all(Dimensions.height8),
+                          child: Image.asset("assets/images/Cat.png"),
+                        )),
+                  ),
+                  SizedBox(
+                    height: Dimensions.height5,
+                  ),
+                  MediumText(
+                    text: "Cat",
+                    color: AppColor.mainBlackColor.withOpacity(0.75),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Dog()));
+                    },
+                    child: Container(
+                        height: Dimensions.height40,
+                        width: Dimensions.height40,
+                        decoration: BoxDecoration(
+                            color: AppColor.bgColor1,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius8)),
+                        child: Padding(
+                          padding: EdgeInsets.all(Dimensions.height10),
+                          child: Image.asset("assets/images/Dog.png"),
+                        )),
+                  ),
+                  SizedBox(
+                    height: Dimensions.height5,
+                  ),
+                  MediumText(
+                    text: "Dog",
+                    color: AppColor.mainBlackColor.withOpacity(0.75),
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Fish()));
+                    },
+                    child: Container(
+                        height: Dimensions.height40,
+                        width: Dimensions.width40,
+                        decoration: BoxDecoration(
+                            color: AppColor.bgColor1,
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius8)),
+                        child: Padding(
+                          padding: EdgeInsets.all(Dimensions.height10),
+                          child: Image.asset("assets/images/Fish.png"),
+                        )),
+                  ),
+                  SizedBox(
+                    height: Dimensions.height5,
+                  ),
+                  MediumText(
+                    text: "Fish",
+                    color: AppColor.mainBlackColor.withOpacity(0.75),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: Dimensions.height20,
+        ),
+        StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: Database().streamCatalog(),
+          builder:
+              (_, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            if (!snapshot.hasData) {
+              return Container();
+            } else {
+              List<DocumentSnapshot<Map<String, dynamic>>> documents;
+              documents = snapshot.data!.docs;
+
+              return Wrap(
+                children: List.generate(
+                  documents.length,
+                  (index) {
+                    DocumentSnapshot<Map<String, dynamic>> docs =
+                        documents[index];
+
+                    return _listCatalog(context, docs, userModels);
+                  },
+                ),
+              );
+            }
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+// void showAlert(BuildContext context) {
+//   showDialog(
+//       context: context,
+//       builder: (context) => const AlertDialog(
+//             content: Text(
+//                 "Disclaimer!\n\nThis version of Planet Pets is still in development and is not completed yet. if you find any bugs please report to planetpetsdev@gmail.com,\n\nThanks !"),
+//           ));
+// }
+
+Widget _listCatalog(BuildContext context,
+    DocumentSnapshot<Map<String, dynamic>> docs, UserModels userModels) {
   CatalogModels models = CatalogModels.formData(docs);
 
   return InkWell(
@@ -293,7 +332,10 @@ Widget _listCatalog(
         context,
         MaterialPageRoute(
           builder: (context) {
-            return ItemInfo(models);
+            return ItemInfo(
+              models,
+              userModels: userModels,
+            );
           },
         ),
       );

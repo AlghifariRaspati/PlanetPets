@@ -4,9 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/card.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
-
 import '../../../../resources/database/database.dart';
 import '../../../../resources/models/models.dart';
 
@@ -32,9 +30,8 @@ class _FavoriteViewState extends State<FavoriteView> {
                   child: Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: Dimensions.width20),
-                    padding: EdgeInsets.only(top: Dimensions.height20),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SemiBigText(
                           text: "Favorite",

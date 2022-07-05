@@ -29,7 +29,7 @@ Future main() async {
         debugShowCheckedModeBanner: false,
         title: "Application",
         getPages: AppPages.routes,
-        home: const AuthChecker(),
+        home: AuthChecker(),
         navigatorKey: navigatorKey,
         scaffoldMessengerKey: Utils.messengerKey,
       ),
@@ -38,10 +38,3 @@ Future main() async {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
-
-class MyApp extends StatelessWidget {
-  static final String title = "Firebase Auth";
-
-  @override
-  Widget build(BuildContext context) => Scaffold();
-}

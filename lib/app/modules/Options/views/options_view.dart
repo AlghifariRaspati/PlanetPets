@@ -1,23 +1,13 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
-import 'package:planet_pets_app/app/modules/Sign_In/views/sign_in_view.dart';
-import 'package:planet_pets_app/app/routes/app_pages.dart';
+import 'package:planet_pets_app/app/modules/Options/views/Email_Option.dart';
+import 'package:planet_pets_app/app/modules/Options/views/Password_Option.dart';
 import 'package:planet_pets_app/auth_service.dart';
-
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
-
-import 'package:provider/provider.dart';
-
 import '../controllers/options_controller.dart';
 
 class OptionsView extends GetView<OptionsController> {
@@ -56,28 +46,46 @@ class OptionsView extends GetView<OptionsController> {
             child: Column(
               children: [
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Change E-Mail",
-                      style: TextStyle(
-                          color: AppColor.mainBlackColor.withOpacity(0.7),
-                          fontWeight: FontWeight.w700,
-                          fontSize: Dimensions.font16),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EmailOption()));
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                        "Change E-Mail",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppColor.mainBlackColor.withOpacity(0.7),
+                            fontWeight: FontWeight.w700,
+                            fontSize: Dimensions.font16),
+                      ),
                     )),
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                 ),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Change Password",
-                      style: TextStyle(
-                          color: AppColor.mainBlackColor.withOpacity(0.7),
-                          fontWeight: FontWeight.w700,
-                          fontSize: Dimensions.font16),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PassOption()));
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                        "Change Password",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: AppColor.mainBlackColor.withOpacity(0.7),
+                            fontWeight: FontWeight.w700,
+                            fontSize: Dimensions.font16),
+                      ),
                     )),
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                 )

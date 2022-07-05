@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_screen1.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_screen2.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_screen3.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
-import 'package:planet_pets_app/app/routes/app_pages.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';

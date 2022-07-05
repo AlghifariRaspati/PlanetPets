@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
 
-import 'package:get/get.dart';
-import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
-import 'package:planet_pets_app/utils/colors.dart';
-import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/medium_text.dart';
-import 'package:planet_pets_app/widgets/semi_big_text.dart';
-import '../controllers/profile_controller.dart';
+import '../../../../utils/colors.dart';
+import '../../../../utils/dimensions.dart';
+import '../../../../widgets/Medium_Text.dart';
+import '../../../../widgets/semi_big_text.dart';
 
-class ProfileView extends GetView<ProfileController> {
+class StoreProfile extends StatelessWidget {
+  const StoreProfile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,24 +32,23 @@ class ProfileView extends GetView<ProfileController> {
                       backgroundColor: AppColor.bgColor1,
                       elevation: 0,
                     ),
-                    Center(
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: Dimensions.height10,
-                          ),
-                          Image.asset('assets/images/UserIcon.png'),
-                        ],
-                      ),
-                    )
+                    Positioned.fill(
+                      bottom: -150,
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Image.asset('assets/images/UserIcon.png')),
+                    ),
                   ],
+                ),
+                SizedBox(
+                  height: Dimensions.height70,
                 ),
                 Align(
                   alignment: Alignment.center,
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Dimensions.height15,
+                        height: Dimensions.height10,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,13 +124,11 @@ class ProfileView extends GetView<ProfileController> {
                                       )),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.pushAndRemoveUntil(
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                const NavBar(),
-                                          ),
-                                          (route) => false,
+                                              builder: (context) =>
+                                                  StoreHomeDartView()),
                                         );
                                       },
                                       child: SemiBigText(

@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:planet_pets_app/widgets/utils.dart';
 
@@ -30,7 +27,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
     if (!isEmailVerified) {
       sendVerificationEmail();
 
-      timer = Timer.periodic(Duration(seconds: 3), (_) => checkEmailVerified());
+      timer = Timer.periodic(
+          const Duration(seconds: 3), (_) => checkEmailVerified());
     }
   }
 
@@ -61,10 +59,13 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
   @override
   Widget build(BuildContext context) => isEmailVerified
-      ? NavBar()
+      ? const NavBar()
       : Scaffold(
           backgroundColor: AppColor.bgColor1,
           appBar: AppBar(
+            leading: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: const Icon(Icons.arrow_back, color: Colors.orange)),
             backgroundColor: AppColor.bgColor1,
             title: Text(
               "Verification",

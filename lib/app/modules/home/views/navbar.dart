@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:planet_pets_app/app/modules/home/views/chat.dart';
+import 'package:planet_pets_app/app/modules/home/views/favorite.dart';
+
 import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 
-import 'favorite.dart';
 import 'home_view.dart';
 
 class NavBar extends StatefulWidget {
@@ -27,7 +27,6 @@ class _NavBarState extends State<NavBar> {
 
   final List<Widget> _pages = [
     HomeView(),
-    ChatView(),
     FavoriteView(),
     UserView(),
   ];
@@ -49,10 +48,6 @@ class _NavBarState extends State<NavBar> {
           items: [
             DotNavigationBarItem(
                 icon: Icon(Icons.home_filled),
-                selectedColor: AppColor.mainColor,
-                unselectedColor: AppColor.blankColor),
-            DotNavigationBarItem(
-                icon: Icon(Icons.chat),
                 selectedColor: AppColor.mainColor,
                 unselectedColor: AppColor.blankColor),
             DotNavigationBarItem(

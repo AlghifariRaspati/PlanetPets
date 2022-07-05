@@ -1,17 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:planet_pets_app/app/modules/home/views/history.dart';
-
+import 'package:get/get.dart';
+import 'package:planet_pets_app/widgets/medium_text.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
-import '../../../../widgets/Medium_Text.dart';
+import '../../../../widgets/medium_text.dart';
 import '../../../../widgets/semi_big_text.dart';
 import '../../Options/views/options_view.dart';
 import '../../profile/views/profile_view.dart';
+import '../controllers/store_home_dart_controller.dart';
 
-class UserView extends StatelessWidget {
-  const UserView({Key? key}) : super(key: key);
-
+class StoreHomeDartView extends GetView<StoreHomeDartController> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
@@ -34,21 +33,6 @@ class UserView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const History();
-                            }));
-                          },
-                          child: SizedBox(
-                            child: Icon(
-                              Icons.receipt_long_outlined,
-                              color: AppColor.mainColor,
-                              size: Dimensions.icon25,
-                            ),
-                          ),
-                        ),
                         SizedBox(
                           width: Dimensions.height15,
                         ),
@@ -108,30 +92,6 @@ class UserView extends StatelessWidget {
                     ),
                     SizedBox(
                       height: Dimensions.height20,
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Dimensions.height30),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: Dimensions.height50,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            primary: AppColor.mainColor,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius20)),
-                          ),
-                          child: Text(
-                            "Open Store",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'Poppins',
-                                fontSize: Dimensions.font16),
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

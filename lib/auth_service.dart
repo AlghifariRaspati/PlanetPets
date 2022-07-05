@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
-import 'package:planet_pets_app/widgets/sign_up.dart';
+import 'package:planet_pets_app/verify_email.dart';
 
 class AuthChecker extends StatelessWidget {
   const AuthChecker({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class AuthChecker extends StatelessWidget {
           if (snapshot.hasData) {
             return const NavBar();
           } else {
-            return SignUpSignInView();
+            return IntroView();
           }
         },
       ),
@@ -35,10 +34,22 @@ class AuthService {
           if (snapshot.hasData) {
             return const NavBar();
           } else {
-            return const IntroView();
+            return VerifyEmail();
           }
         });
   }
+
+  // AuthorizeAccess(BuildContext context) {
+  //   FirebaseAuth.instance.currentUser().then(user)(FirebaseFirestore.instance
+  //       .collection('/User')
+  //       .where('uid', isEqualTo: user.uid)
+  //       .getDocuments()
+  //       .then((docs) {
+  //     if (docs.documents[0].exists) {
+  //       if (docs.documents[0].data['role'] == 'store owner') {}
+  //     }
+  //   }));
+  // }
 
   signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser =

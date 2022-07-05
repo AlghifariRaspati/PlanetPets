@@ -23,13 +23,14 @@ class CatalogModels {
 
   factory CatalogModels.formData(DocumentSnapshot<Map<String, dynamic>> doc) {
     return CatalogModels(
-        docId: doc.id,
-        image: doc.data()!['image'],
-        title: doc.data()!['title'],
-        price: doc.data()!['price'],
-        description: doc.data()!['description'],
-        category: doc.data()!['category'],
-        amount: doc.data()!['amount'],
-        store: doc.data()!['store']);
+      docId: doc.id,
+      image: doc.data()!['image'],
+      title: doc.data()!['title'],
+      price: doc.data()!['price'],
+      description: doc.data()!['description'],
+      category: doc.data()!['category'],
+      amount: doc.data()!['amount'],
+      store: doc.data()!['store'],
+    );
   }
 }

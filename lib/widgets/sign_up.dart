@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
-import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
-
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/main.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:planet_pets_app/widgets/utils.dart';
-import 'package:provider/provider.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -20,14 +17,16 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final formKey = GlobalKey<FormState>();
+  bool isInfoCorrect = true;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
+  // final userController = TextEditingController();
   @override
   void dispose() {
-    emailController.dispose();
     passwordController.dispose();
+    emailController.dispose();
+    // passwordController.dispose();
 
     super.dispose();
   }
@@ -87,7 +86,7 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(height: Dimensions.height5),
                             TextFormField(
                               controller: emailController,
-                              style: TextStyle(height: 0.7),
+                              style: const TextStyle(height: 0.7),
                               keyboardType: TextInputType.emailAddress,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -175,10 +174,11 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: Dimensions.height15,
                       ),
-                      Container(
+                      SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: Dimensions.height50,
                         child: ElevatedButton(
+                            // onPressed: signUp,
                             onPressed: signUp,
                             style: ElevatedButton.styleFrom(
                               primary: AppColor.mainColor,
@@ -210,9 +210,10 @@ class _SignUpState extends State<SignUp> {
               child: CircularProgressIndicator(),
             ));
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
     } on FirebaseAuthException catch (e) {
       print(e.toString());
 

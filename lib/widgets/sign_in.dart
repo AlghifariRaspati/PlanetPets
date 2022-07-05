@@ -1,18 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/Sign_In/views/forgot_pass_view.dart';
-import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
-
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/main.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-import 'package:planet_pets_app/widgets/medium_text.dart';
-import 'package:planet_pets_app/widgets/semi_big_text.dart';
-
 import 'package:planet_pets_app/widgets/utils.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

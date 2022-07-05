@@ -11,6 +11,7 @@ abstract class Routes {
   static const OPTIONS = _Paths.OPTIONS;
   static const SETTINGS = _Paths.SETTINGS;
   static const PROFILE = _Paths.PROFILE;
+  static const STORE_HOME_DART = _Paths.STORE_HOME_DART;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const OPTIONS = '/options';
   static const SETTINGS = '/settings';
   static const PROFILE = '/profile';
+  static const STORE_HOME_DART = '/store-home-dart';
 }

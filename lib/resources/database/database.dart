@@ -10,4 +10,8 @@ class Database {
   Stream<QuerySnapshot<Map<String, dynamic>>> streamCatalog() {
     return firestore.collection('Catalog').snapshots();
   }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamUser() {
+    return firestore.collection('User').snapshots();
+  }
 }

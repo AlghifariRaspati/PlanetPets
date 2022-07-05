@@ -17,6 +17,9 @@ dependencies:
   firebase_messaging: ^11.4.2
   firebase_storage: ^10.2.18
   provider: ^6.0.3
+  url_launcher: ^6.1.4
+  http: ^0.13.4
+  flutter_phone_direct_caller: ^2.1.1
 
   dot_navigation_bar: 1.0.1+4
 
@@ -49,8 +52,10 @@ flutter:
     - assets/images/Cat.png
     - assets/images/Dog.png
     - assets/images/Fish.png
-    - assets/images/dog_toy.png
+    - assets/images/Bird.png
     - assets/images/placeholder-image.png
+    - assets/images/loading.gif
+    - assets/images/user_placeholder.png
 
   fonts:
     - family: Poppins
