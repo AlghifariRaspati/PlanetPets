@@ -134,90 +134,93 @@ class _AddProductsState extends State<AddProducts> {
                                 border: Border.all(),
                                 borderRadius:
                                     BorderRadius.circular(Dimensions.radius8)),
-                            child: InkWell(
-                              onTap: getImage,
-                              child: Container(
-                                  padding: EdgeInsets.only(
-                                      bottom: Dimensions.height70,
-                                      left: Dimensions.width10),
-                                  child: Icon(Icons.add_rounded)),
+                            child: Image.file(
+                              _image!,
+                              width: Dimensions.width150,
+                              height: Dimensions.height30,
+                              fit: BoxFit.cover,
                             )),
-                        SizedBox(
-                          height: Dimensions.height100,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: Dimensions.width25),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width,
-                                height: Dimensions.height50,
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              content: MediumText(
-                                                  text: "Confirm Details?"),
-                                              actions: [
-                                                TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
-                                                    child: SemiBigText(
-                                                      text: "Cancel",
-                                                    )),
-                                                TextButton(
-                                                    onPressed: () {
-                                                      addProducts.add({
-                                                        'title': titleController
-                                                            .text,
-                                                        "image": "",
-                                                        'description':
-                                                            descController.text,
-                                                        'category': "",
-                                                        'store': "",
-                                                        'price': int.parse(
-                                                            priceController
-                                                                .text),
-                                                      });
-
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (BuildContext
-                                                                    context) =>
-                                                                const StoreHomeDartView()),
-                                                      );
-                                                    },
-                                                    child: SemiBigText(
-                                                      text: "Yes",
-                                                    ))
-                                              ],
-                                            ));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    primary: AppColor.mainColor,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.radius8)),
-                                  ),
-                                  child: Text(
-                                    "Add Product",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Poppins',
-                                        fontSize: Dimensions.font16),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: Dimensions.height20,
-                              ),
-                            ],
-                          ),
-                        )
+                        InkWell(
+                            onTap: getImage,
+                            child: Icon(
+                              Icons.add_rounded,
+                              size: Dimensions.height100,
+                            ))
                       ],
+                    ),
+                    SizedBox(
+                      height: Dimensions.height100,
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Dimensions.width25),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            height: Dimensions.height50,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                          content: MediumText(
+                                              text: "Confirm Details?"),
+                                          actions: [
+                                            TextButton(
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                                child: SemiBigText(
+                                                  text: "Cancel",
+                                                )),
+                                            TextButton(
+                                                onPressed: () {
+                                                  addProducts.add({
+                                                    'title':
+                                                        titleController.text,
+                                                    "image": "",
+                                                    'description':
+                                                        descController.text,
+                                                    'category': "",
+                                                    'store': "",
+                                                    'price': int.parse(
+                                                        priceController.text),
+                                                  });
+
+                                                  Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (BuildContext
+                                                                context) =>
+                                                            const StoreHomeDartView()),
+                                                  );
+                                                },
+                                                child: SemiBigText(
+                                                  text: "Yes",
+                                                ))
+                                          ],
+                                        ));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: AppColor.mainColor,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.radius8)),
+                              ),
+                              child: Text(
+                                "Add Product",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins',
+                                    fontSize: Dimensions.font16),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: Dimensions.height20,
+                          ),
+                        ],
+                      ),
                     ),
                   ]))
         ])));
