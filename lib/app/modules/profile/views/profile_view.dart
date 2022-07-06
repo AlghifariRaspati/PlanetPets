@@ -83,21 +83,7 @@ class ProfileView extends GetView<ProfileController> {
                             horizontal: Dimensions.width30),
                         child: Column(
                           children: [
-                            TextField(
-                              maxLines: 1,
-                              decoration: InputDecoration(
-                                  border: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: AppColor.mainBlackColor
-                                              .withOpacity(0.2))),
-                                  labelText: "Name",
-                                  labelStyle: TextStyle(
-                                      color: AppColor.mainBlackColor
-                                          .withOpacity(0.2),
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w700)),
-                            ),
-                            TextField(
+                            TextFormField(
                               maxLines: 1,
                               decoration: InputDecoration(
                                   border: UnderlineInputBorder(

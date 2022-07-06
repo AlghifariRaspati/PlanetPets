@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:planet_pets_app/utils/colors.dart';
@@ -5,7 +6,6 @@ import 'package:planet_pets_app/main.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import 'package:planet_pets_app/widgets/utils.dart';
 
 class SignUp extends StatefulWidget {
@@ -21,11 +21,13 @@ class _SignUpState extends State<SignUp> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final usernameController = TextEditingController();
   // final userController = TextEditingController();
   @override
   void dispose() {
     passwordController.dispose();
     emailController.dispose();
+    usernameController.dispose();
     // passwordController.dispose();
 
     super.dispose();
@@ -46,7 +48,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.6,
+                height: MediaQuery.of(context).size.height * 0.65,
                 width: MediaQuery.of(context).size.width,
                 child: Container(
                   padding: EdgeInsets.symmetric(
@@ -72,7 +74,34 @@ class _SignUpState extends State<SignUp> {
                             fontSize: Dimensions.font30),
                       ),
                       SizedBox(
-                        height: Dimensions.height40,
+                        height: Dimensions.height30,
+                      ),
+                      MediumText(
+                        text: "Username",
+                        color: AppColor.mainColor,
+                      ),
+                      SizedBox(height: Dimensions.height5),
+                      TextFormField(
+                        controller: usernameController,
+                        style: TextStyle(height: 0.7),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) => value != null && value.length < 6
+                            ? 'Enter min. 6 characters'
+                            : null,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 233, 233, 233),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.radius20),
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              )),
+                        ),
+                      ),
+                      SizedBox(
+                        height: Dimensions.height5,
                       ),
                       Form(
                         key: formKey,
@@ -152,25 +181,6 @@ class _SignUpState extends State<SignUp> {
                       SizedBox(
                         height: Dimensions.height15,
                       ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: RichText(
-                            text: TextSpan(
-                                text: "Already have an account? ",
-                                style: TextStyle(
-                                    fontSize: Dimensions.font12,
-                                    fontFamily: "Poppins",
-                                    color: AppColor.mainBlackColor
-                                        .withOpacity(0.7)),
-                                children: [
-                              TextSpan(
-                                  text: "Sign In",
-                                  style: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColor.mainColor))
-                            ])),
-                      ),
                       SizedBox(
                         height: Dimensions.height15,
                       ),
@@ -214,6 +224,26 @@ class _SignUpState extends State<SignUp> {
           .createUserWithEmailAndPassword(
               email: emailController.text.trim(),
               password: passwordController.text.trim());
+
+      FirebaseFirestore.instance
+          .collection('user')
+          .doc(userCredential.user!.uid)
+          .get()
+          .then((value) {
+        if (!value.exists) {
+          FirebaseFirestore.instance
+              .collection('User')
+              .doc(userCredential.user!.uid)
+              .set({
+            'email': emailController.text.trim(),
+            'password': passwordController.text.trim(),
+            'role': "",
+            'store': "",
+            'wa': "",
+            'username': usernameController.text.trim(),
+          });
+        }
+      });
     } on FirebaseAuthException catch (e) {
       print(e.toString());
 

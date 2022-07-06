@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/products.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
+import 'package:planet_pets_app/resources/models/models.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/small_text.dart';
 
@@ -17,16 +22,27 @@ class AddProducts extends StatefulWidget {
 }
 
 class _AddProductsState extends State<AddProducts> {
-  String dropdownValue = 'Bird';
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController descController = TextEditingController();
+
+  File? _image;
+
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    setState(() {
+      this._image = imageTemporary;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titleController = TextEditingController();
-    TextEditingController _priceController = TextEditingController();
-
-    TextEditingController _categoryController = TextEditingController();
-
-    TextEditingController _descController = TextEditingController();
+    final CollectionReference addProducts =
+        FirebaseFirestore.instance.collection('Catalog');
 
     return Scaffold(
         backgroundColor: AppColor.bgColor2,
@@ -53,53 +69,14 @@ class _AddProductsState extends State<AddProducts> {
               ),
             )),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width25),
-                child: Column(
+            child: Column(children: [
+          Container(
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.width25),
+              child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: Dimensions.height50,
-                    ),
-                    MediumText(
-                      text: "Product Type",
-                      color: AppColor.bgColor1,
-                    ),
-                    SizedBox(
-                      height: Dimensions.height25,
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: Dimensions.width10),
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius8)),
-                        child: DropdownButton<String>(
-                          value: dropdownValue,
-                          isExpanded: true,
-                          style: TextStyle(
-                              color: AppColor.bgColor1,
-                              fontWeight: FontWeight.w700,
-                              fontSize: Dimensions.font16,
-                              fontFamily: "Poppins"),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              dropdownValue = newValue!;
-                            });
-                          },
-                          items: <String>['Bird', 'Cat', 'Dog', 'Fish']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        )),
-                    SizedBox(
-                      height: Dimensions.height20,
                     ),
                     MediumText(text: "Product Information"),
                     SizedBox(
@@ -108,8 +85,8 @@ class _AddProductsState extends State<AddProducts> {
                     SmallText(
                       text: "Product name",
                     ),
-                    TextFormField(
-                      controller: _titleController,
+                    TextField(
+                      controller: titleController,
                       decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "Type in the name of your product"),
@@ -122,8 +99,8 @@ class _AddProductsState extends State<AddProducts> {
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    TextFormField(
-                        controller: _priceController,
+                    TextField(
+                        controller: priceController,
                         decoration: const InputDecoration(
                             border: UnderlineInputBorder(),
                             labelText: "Type in the price of your product"),
@@ -139,8 +116,8 @@ class _AddProductsState extends State<AddProducts> {
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    TextFormField(
-                      controller: _descController,
+                    TextField(
+                      controller: descController,
                       decoration: const InputDecoration(
                           border: UnderlineInputBorder(),
                           labelText: "Type in the description of your product"),
@@ -148,92 +125,101 @@ class _AddProductsState extends State<AddProducts> {
                     SizedBox(
                       height: Dimensions.height20,
                     ),
-                    Container(
-                      width: Dimensions.width150,
-                      height: Dimensions.width100,
-                      decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius8)),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: Dimensions.height20,
-                          ),
-                          Icon(
-                            Icons.publish_rounded,
-                            size: Dimensions.height50,
-                          ),
-                          MediumText(text: "Image")
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: Dimensions.height100,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: Dimensions.width25),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      height: Dimensions.height50,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                    content:
-                                        MediumText(text: "Confirm Details?"),
-                                    actions: [
-                                      TextButton(
-                                          onPressed: () =>
-                                              Navigator.pop(context),
-                                          child: SemiBigText(
-                                            text: "Cancel",
-                                          )),
-                                      TextButton(
-                                          onPressed: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (BuildContext
-                                                          context) =>
-                                                      const StoreHomeDartView()),
-                                            );
-                                          },
-                                          child: SemiBigText(
-                                            text: "Yes",
-                                          ))
-                                    ],
-                                  ));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: AppColor.mainColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius8)),
+                    Row(
+                      children: [
+                        Container(
+                            width: Dimensions.width150,
+                            height: Dimensions.height100,
+                            decoration: BoxDecoration(
+                                border: Border.all(),
+                                borderRadius:
+                                    BorderRadius.circular(Dimensions.radius8)),
+                            child: InkWell(
+                              onTap: getImage,
+                              child: Container(
+                                  padding: EdgeInsets.only(
+                                      bottom: Dimensions.height70,
+                                      left: Dimensions.width10),
+                                  child: Icon(Icons.add_rounded)),
+                            )),
+                        SizedBox(
+                          height: Dimensions.height100,
                         ),
-                        child: Text(
-                          "Add Product",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                              fontSize: Dimensions.font16),
-                        ),
-                      ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.width25),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: Dimensions.height50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              content: MediumText(
+                                                  text: "Confirm Details?"),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: SemiBigText(
+                                                      text: "Cancel",
+                                                    )),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      addProducts.add({
+                                                        'title': titleController
+                                                            .text,
+                                                        "image": "",
+                                                        'description':
+                                                            descController.text,
+                                                        'category': "",
+                                                        'store': "",
+                                                        'price': int.parse(
+                                                            priceController
+                                                                .text),
+                                                      });
+
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                const StoreHomeDartView()),
+                                                      );
+                                                    },
+                                                    child: SemiBigText(
+                                                      text: "Yes",
+                                                    ))
+                                              ],
+                                            ));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: AppColor.mainColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radius8)),
+                                  ),
+                                  child: Text(
+                                    "Add Product",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins',
+                                        fontSize: Dimensions.font16),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: Dimensions.height20,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ));
+                  ]))
+        ])));
   }
 }

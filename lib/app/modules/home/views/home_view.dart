@@ -25,6 +25,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -39,14 +40,16 @@ class _HomeViewState extends State<HomeView> {
 
           return Scaffold(
             backgroundColor: AppColor.bgColor2,
-            body: SafeArea(
-              child: Wrap(
-                children: List.generate(
-                  1,
-                  (index) {
-                    UserModels userModels = UserModels.formData(docs[index]);
-                    return _scaffold(context, userModels);
-                  },
+            body: SingleChildScrollView(
+              child: SafeArea(
+                child: Wrap(
+                  children: List.generate(
+                    1,
+                    (index) {
+                      UserModels userModels = UserModels.formData(docs[index]);
+                      return _scaffold(context, userModels);
+                    },
+                  ),
                 ),
               ),
             ),
@@ -58,9 +61,7 @@ class _HomeViewState extends State<HomeView> {
 }
 
 Widget _scaffold(BuildContext context, UserModels userModels) {
-  return SingleChildScrollView(
-    physics:
-        const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+  return Container(
     child: Column(
       children: [
         Column(
@@ -102,7 +103,7 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                                 fontSize: Dimensions.font16),
                             children: [
                               const TextSpan(text: "Hello, "),
-                              TextSpan(text: userModels.name)
+                              TextSpan(text: userModels.username)
                             ],
                           ),
                         ),

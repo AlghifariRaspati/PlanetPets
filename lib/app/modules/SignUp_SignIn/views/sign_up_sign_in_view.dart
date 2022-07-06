@@ -43,7 +43,7 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
               SizedBox(
                 height: Dimensions.top150,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: Dimensions.height50,
                 child: ElevatedButton(

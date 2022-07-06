@@ -7,7 +7,6 @@ class CatalogModels {
   final int price;
   final String description;
   final String category;
-  final int amount;
   final String store;
 
   CatalogModels({
@@ -17,7 +16,6 @@ class CatalogModels {
     required this.price,
     required this.description,
     required this.category,
-    required this.amount,
     required this.store,
   });
 
@@ -29,7 +27,6 @@ class CatalogModels {
       price: doc.data()!['price'],
       description: doc.data()!['description'],
       category: doc.data()!['category'],
-      amount: doc.data()!['amount'],
       store: doc.data()!['store'],
     );
   }

@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
 import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
+import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
 import 'package:planet_pets_app/verify_email.dart';
 
 class AuthChecker extends StatelessWidget {
@@ -14,9 +16,23 @@ class AuthChecker extends StatelessWidget {
     return Scaffold(
       body: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (BuildContext context, snapshot) {
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.hasData) {
-            return const NavBar();
+            print(snapshot.data!.uid);
+            FirebaseFirestore.instance
+                .collection('User')
+                .doc(snapshot.data!.uid)
+                .get()
+                .then((value) {
+              if (value.data()!['role'] == 'store owner') {
+                return const StoreHomeDartView();
+                // } else if (value.data()!["role"] == 'store owner') {
+                //   return const NavBar();
+              } else {
+                return StoreHomeDartView();
+              }
+            });
+            return NavBar();
           } else {
             return IntroView();
           }
