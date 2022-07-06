@@ -9,6 +9,8 @@ import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
+  const ProfileView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +38,20 @@ class ProfileView extends GetView<ProfileController> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: Dimensions.height10,
+                            height: Dimensions.height25,
                           ),
-                          Image.asset('assets/images/UserIcon.png'),
+                          Container(
+                              height: Dimensions.height100,
+                              width: Dimensions.height100,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(Dimensions.radius30),
+                                  ),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/user_placeholder.png"),
+                                    fit: BoxFit.cover,
+                                  ))),
                         ],
                       ),
                     )

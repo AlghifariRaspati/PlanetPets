@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/home/views/history.dart';
+import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
+import 'package:planet_pets_app/app/modules/store_home.dart/views/store_register.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
@@ -59,9 +61,20 @@ class UserView extends StatelessWidget {
                     child: Column(
                       children: [
                         SizedBox(
-                          height: Dimensions.height10,
+                          height: Dimensions.height25,
                         ),
-                        Image.asset('assets/images/UserIcon.png'),
+                        Container(
+                            height: Dimensions.height100,
+                            width: Dimensions.height100,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.radius30),
+                                ),
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/user_placeholder.png"),
+                                  fit: BoxFit.cover,
+                                ))),
                       ],
                     ),
                   )
@@ -112,11 +125,39 @@ class UserView extends StatelessWidget {
                     Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: Dimensions.height30),
-                      child: Container(
+                      child: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: Dimensions.height50,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      content:
+                                          MediumText(text: "Create store?"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: SemiBigText(
+                                              text: "Cancel",
+                                            )),
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        const StoreRegister()),
+                                              );
+                                            },
+                                            child: SemiBigText(
+                                              text: "Yes",
+                                            ))
+                                      ],
+                                    ));
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: AppColor.mainColor,
                             shape: RoundedRectangleBorder(
@@ -124,7 +165,7 @@ class UserView extends StatelessWidget {
                                     BorderRadius.circular(Dimensions.radius20)),
                           ),
                           child: Text(
-                            "Open Store",
+                            "Create Store",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Poppins',

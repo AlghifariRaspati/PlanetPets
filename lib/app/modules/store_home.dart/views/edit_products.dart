@@ -5,18 +5,18 @@ import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
-import '../../../../resources/database/database.dart';
-import '../../../../resources/models/models.dart';
-import '../../../../widgets/small_text.dart';
+import '../../../../../resources/database/database.dart';
+import '../../../../../resources/models/models.dart';
+import '../../../../../widgets/small_text.dart';
 
-class History extends StatefulWidget {
-  const History({Key? key}) : super(key: key);
+class EditProduct extends StatefulWidget {
+  const EditProduct({Key? key}) : super(key: key);
 
   @override
-  State<History> createState() => _HistoryState();
+  State<EditProduct> createState() => _EditProductState();
 }
 
-class _HistoryState extends State<History> {
+class _EditProductState extends State<EditProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,7 @@ class _HistoryState extends State<History> {
               title: Transform(
                   transform: Matrix4.translationValues(-20.0, 0.0, 0.0),
                   child: SemiBigText(
-                    text: "History",
+                    text: "Edit Products",
                     color: AppColor.mainColor,
                   )),
               flexibleSpace: Container(
@@ -81,14 +81,14 @@ Widget _listCatalog(
 
   return InkWell(
     onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return ItemInfo(models);
-          },
-        ),
-      );
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) {
+      //       return ItemInfo(models);
+      //     },
+      //   ),
+      // );
     },
     child: Container(
       margin: EdgeInsets.symmetric(
@@ -164,18 +164,9 @@ Widget _listCatalog(
                     SizedBox(
                       height: Dimensions.height10,
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.store_rounded,
-                          color: AppColor.mainBlackColor.withOpacity(0.7),
-                        ),
-                        SmallText(
-                          text: models.store,
-                          color: AppColor.mainBlackColor.withOpacity(0.7),
-                        )
-                      ],
-                    ),
+                    SizedBox(
+                      height: Dimensions.height30,
+                    )
                   ],
                 ),
               ),
@@ -195,7 +186,16 @@ Widget _listCatalog(
                       fontWeight: FontWeight.w700),
                 ),
                 SizedBox(
-                  height: Dimensions.height50,
+                  height: Dimensions.height30,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.delete_rounded),
+                    SizedBox(
+                      width: Dimensions.width25,
+                    ),
+                    Icon(Icons.edit_rounded),
+                  ],
                 )
               ],
             ),

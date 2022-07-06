@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
-
-import '../../../../utils/colors.dart';
-import '../../../../utils/dimensions.dart';
-import '../../../../widgets/Medium_Text.dart';
-import '../../../../widgets/semi_big_text.dart';
+import 'package:planet_pets_app/utils/colors.dart';
+import 'package:planet_pets_app/utils/dimensions.dart';
+import 'package:planet_pets_app/widgets/medium_text.dart';
+import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 class StoreProfile extends StatelessWidget {
   const StoreProfile({Key? key}) : super(key: key);
@@ -32,23 +31,35 @@ class StoreProfile extends StatelessWidget {
                       backgroundColor: AppColor.bgColor1,
                       elevation: 0,
                     ),
-                    Positioned.fill(
-                      bottom: -150,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Image.asset('assets/images/UserIcon.png')),
-                    ),
+                    Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: Dimensions.height25,
+                          ),
+                          Container(
+                              height: Dimensions.height100,
+                              width: Dimensions.height100,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(Dimensions.radius30),
+                                  ),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/user_placeholder.png"),
+                                    fit: BoxFit.cover,
+                                  ))),
+                        ],
+                      ),
+                    )
                   ],
-                ),
-                SizedBox(
-                  height: Dimensions.height70,
                 ),
                 Align(
                   alignment: Alignment.center,
                   child: Column(
                     children: [
                       SizedBox(
-                        height: Dimensions.height10,
+                        height: Dimensions.height15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -124,11 +135,13 @@ class StoreProfile extends StatelessWidget {
                                       )),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.push(
+                                        Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StoreHomeDartView()),
+                                            builder: (BuildContext context) =>
+                                                const StoreHomeDartView(),
+                                          ),
+                                          (route) => false,
                                         );
                                       },
                                       child: SemiBigText(

@@ -17,7 +17,7 @@ import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({Key? key}) : super(key: key);
+  const HomeView({Key? key}) : super(key: key);
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -73,11 +73,22 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                   children: [
                     Row(
                       children: [
-                        SizedBox(
-                          child: Image.asset("assets/images/UserIcon.png"),
-                          width: Dimensions.height40,
-                          height: Dimensions.width40,
-                        ),
+                        Container(
+                            height: Dimensions.height40,
+                            width: Dimensions.height40,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 0.5,
+                                    color: AppColor.mainBlackColor
+                                        .withOpacity(0.7)),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.radius8),
+                                ),
+                                image: const DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/user_placeholder.png"),
+                                  fit: BoxFit.cover,
+                                ))),
                         SizedBox(
                           width: Dimensions.width10,
                         ),

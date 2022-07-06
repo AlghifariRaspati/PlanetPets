@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/Options/views/Email_Option.dart';
 import 'package:planet_pets_app/app/modules/Options/views/Password_Option.dart';
 import 'package:planet_pets_app/auth_service.dart';
@@ -7,10 +6,9 @@ import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
-import '../controllers/options_controller.dart';
 
-class OptionsView extends GetView<OptionsController> {
-  const OptionsView({Key? key}) : super(key: key);
+class StoreSettings extends StatelessWidget {
+  const StoreSettings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

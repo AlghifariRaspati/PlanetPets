@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter/material.dart';
+import 'package:planet_pets_app/app/modules/home/views/store_info.dart';
 import 'package:planet_pets_app/resources/models/usermodel.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
@@ -148,10 +149,6 @@ class ItemInfo extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         MediumText(text: "Store Info"),
-                        SmallText(
-                          text: "See all",
-                          color: AppColor.mainColor,
-                        )
                       ],
                     ),
                     SizedBox(
@@ -165,29 +162,123 @@ class ItemInfo extends StatelessWidget {
                     SizedBox(
                       height: Dimensions.height5,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.radius16)),
-                          margin: EdgeInsets.only(right: Dimensions.width20),
-                          child: Image(
-                            height: Dimensions.width100,
-                            width: Dimensions.width100,
-                            image: const AssetImage(
-                                "assets/images/user_placeholder.png"),
-                            fit: BoxFit.cover,
+                    Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: Dimensions.height10,
+                          horizontal: Dimensions.width15),
+                      width: (MediaQuery.of(context).size.width),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 1,
+                            style: BorderStyle.solid,
+                            color: AppColor.mainBlackColor.withOpacity(0.2)),
+                        borderRadius: BorderRadius.circular(Dimensions.radius8),
+                        color: AppColor.blankColor,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(1, 2),
+                            blurRadius: 4,
+                            color: AppColor.mainBlackColor.withOpacity(0.1),
                           ),
-                        ),
-                        Column(
-                          children: [
-                            MediumText(text: models.store),
-                          ],
-                        )
-                      ],
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                              height: Dimensions.height100,
+                              width: Dimensions.height100,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(Dimensions.radius8),
+                                  ),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        "assets/images/user_placeholder.png"),
+                                    fit: BoxFit.cover,
+                                  ))),
+                          SizedBox(
+                            width: Dimensions.width5,
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SmallText(text: models.store),
+                                    Container(
+                                        margin: EdgeInsets.only(
+                                            right: Dimensions.width5),
+                                        child: TextButton(
+                                            onPressed: () {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return const StoreInfo();
+                                              }));
+                                            },
+                                            child: Text(
+                                              "See details",
+                                              style: TextStyle(
+                                                  color: AppColor.mainColor),
+                                            ))),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: Dimensions.height5,
+                                ),
+                                const Text(
+                                  "This is the store location",
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(
+                                  height: Dimensions.height30,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )
+                    // Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Container(
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(
+                    //                   Dimensions.radius16)),
+                    //           child: Container(
+                    //               height: Dimensions.height100,
+                    //               width: Dimensions.height100,
+                    //               decoration: BoxDecoration(
+                    //                   borderRadius: BorderRadius.all(
+                    //                     Radius.circular(Dimensions.radius8),
+                    //                   ),
+                    //                   image: const DecorationImage(
+                    //                     image: AssetImage(
+                    //                         "assets/images/user_placeholder.png"),
+                    //                     fit: BoxFit.cover,
+                    //                   )))),
+                    //       SizedBox(
+                    //         width: Dimensions.width15,
+                    //       ),
+                    //       Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: [
+                    //           MediumText(text: models.store),
+                    //           Container(
+                    //             padding:
+                    //                 EdgeInsets.only(right: Dimensions.width10),
+                    //             child: const Text(
+                    //               "Jl. Jendral Ahmad Yani N0.819, Padasuka Kec. Kiaracondong, Kota Bandung, Jawa Barat",
+                    //               overflow: TextOverflow.ellipsis,
+                    //             ),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ])
                   ]),
             ),
             SizedBox(
