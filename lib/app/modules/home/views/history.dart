@@ -148,20 +148,6 @@ Widget _listCatalog(
                       ),
                     ),
                     SizedBox(
-                      height: Dimensions.height5,
-                    ),
-                    RichText(
-                        text: TextSpan(
-                            style: TextStyle(
-                                color: AppColor.mainBlackColor.withOpacity(0.7),
-                                fontFamily: "Poppins",
-                                fontWeight: FontWeight.w700,
-                                fontSize: Dimensions.font12),
-                            children: [
-                          TextSpan(text: models.amount.toString()),
-                          TextSpan(text: "x")
-                        ])),
-                    SizedBox(
                       height: Dimensions.height10,
                     ),
                     Row(
