@@ -21,6 +21,13 @@ class _AddProductsState extends State<AddProducts> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController _titleController = TextEditingController();
+    TextEditingController _priceController = TextEditingController();
+
+    TextEditingController _categoryController = TextEditingController();
+
+    TextEditingController _descController = TextEditingController();
+
     return Scaffold(
         backgroundColor: AppColor.bgColor2,
         appBar: PreferredSize(
@@ -49,118 +56,121 @@ class _AddProductsState extends State<AddProducts> {
           child: Column(
             children: [
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: Dimensions.width25),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: Dimensions.height50,
-                        ),
-                        MediumText(
-                          text: "Product Type",
-                          color: AppColor.bgColor1,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height25,
-                        ),
-                        Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: Dimensions.width10),
-                            decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius8)),
-                            child: DropdownButton<String>(
-                              value: dropdownValue,
-                              isExpanded: true,
-                              style: TextStyle(
-                                  color: AppColor.bgColor1,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: Dimensions.font16,
-                                  fontFamily: "Poppins"),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownValue = newValue!;
-                                });
-                              },
-                              items: <String>[
-                                'Bird',
-                                'Cat',
-                                'Dog',
-                                'Fish'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            )),
-                        SizedBox(
-                          height: Dimensions.height20,
-                        ),
-                        MediumText(text: "Product Information"),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        SmallText(
-                          text: "Product name",
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText: "Type in the name of your product"),
-                          maxLines: 1,
-                        ),
-                        SizedBox(
-                          height: Dimensions.height20,
-                        ),
-                        MediumText(text: "Product Price"),
-                        SizedBox(
-                          height: Dimensions.height10,
-                        ),
-                        TextFormField(
-                            decoration: const InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: "Type in the price of your product"),
-                            maxLines: 1,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly
-                            ]),
-                        SizedBox(
-                          height: Dimensions.height25,
-                        ),
-                        MediumText(text: "Product description"),
-                        SizedBox(
-                          height: Dimensions.height20,
-                        ),
-                        TextFormField(
-                          decoration: const InputDecoration(
-                              border: UnderlineInputBorder(),
-                              labelText:
-                                  "Type in the description of your product"),
-                        ),
-                        SizedBox(
-                          height: Dimensions.height20,
-                        ),
-                        Container(
-                            width: Dimensions.width150,
-                            height: Dimensions.width100,
-                            decoration: BoxDecoration(
-                                border: Border.all(),
-                                borderRadius:
-                                    BorderRadius.circular(Dimensions.radius8)),
-                            child: Column(children: [
-                              SizedBox(
-                                height: Dimensions.height20,
-                              ),
-                              Icon(
-                                Icons.publish_rounded,
-                                size: Dimensions.height50,
-                              ),
-                              MediumText(text: "Image")
-                            ])),
-                      ])),
+                padding: EdgeInsets.symmetric(horizontal: Dimensions.width25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: Dimensions.height50,
+                    ),
+                    MediumText(
+                      text: "Product Type",
+                      color: AppColor.bgColor1,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height25,
+                    ),
+                    Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Dimensions.width10),
+                        decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius:
+                                BorderRadius.circular(Dimensions.radius8)),
+                        child: DropdownButton<String>(
+                          value: dropdownValue,
+                          isExpanded: true,
+                          style: TextStyle(
+                              color: AppColor.bgColor1,
+                              fontWeight: FontWeight.w700,
+                              fontSize: Dimensions.font16,
+                              fontFamily: "Poppins"),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                            });
+                          },
+                          items: <String>['Bird', 'Cat', 'Dog', 'Fish']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        )),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
+                    MediumText(text: "Product Information"),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    SmallText(
+                      text: "Product name",
+                    ),
+                    TextFormField(
+                      controller: _titleController,
+                      decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: "Type in the name of your product"),
+                      maxLines: 1,
+                    ),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
+                    MediumText(text: "Product Price"),
+                    SizedBox(
+                      height: Dimensions.height10,
+                    ),
+                    TextFormField(
+                        controller: _priceController,
+                        decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: "Type in the price of your product"),
+                        maxLines: 1,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ]),
+                    SizedBox(
+                      height: Dimensions.height25,
+                    ),
+                    MediumText(text: "Product description"),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
+                    TextFormField(
+                      controller: _descController,
+                      decoration: const InputDecoration(
+                          border: UnderlineInputBorder(),
+                          labelText: "Type in the description of your product"),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height20,
+                    ),
+                    Container(
+                      width: Dimensions.width150,
+                      height: Dimensions.width100,
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius8)),
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: Dimensions.height20,
+                          ),
+                          Icon(
+                            Icons.publish_rounded,
+                            size: Dimensions.height50,
+                          ),
+                          MediumText(text: "Image")
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(
                 height: Dimensions.height100,
               ),

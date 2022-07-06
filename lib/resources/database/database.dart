@@ -14,4 +14,28 @@ class Database {
   Stream<QuerySnapshot<Map<String, dynamic>>> streamUser() {
     return firestore.collection('User').snapshots();
   }
+
+  Future updateCatalog({required var data}) async {
+    try {
+      await firestore.collection('Catalog').doc(docId).update(data);
+    } catch (e) {
+      print("Upload Gagal");
+    }
+  }
+
+  Future deleteCatalog({required var data}) async {
+    try {
+      await firestore.collection('Catalog').doc(docId).delete();
+    } catch (e) {
+      print("Upload Gagal");
+    }
+  }
+
+  Future createCatalog({required var data}) async {
+    try {
+      return await firestore.collection('Catalog').add(data);
+    } catch (e) {
+      print("Upload Gagal");
+    }
+  }
 }
