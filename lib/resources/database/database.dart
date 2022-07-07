@@ -2,17 +2,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
   final String? docId;
+  final String? store;
 
-  Database({this.docId});
+  Database({this.docId, this.store});
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamCatalog() {
-    return firestore.collection('Catalog').snapshots();
+    return firestore
+        .collection('Catalog')
+        .where('store', isEqualTo: store)
+        .snapshots();
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamUser() {
     return firestore.collection('User').snapshots();
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> docUser() {
+    return firestore.collection('User').doc(docId).snapshots();
   }
 
   Future updateCatalog({required var data}) async {

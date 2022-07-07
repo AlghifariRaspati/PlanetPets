@@ -4,13 +4,15 @@ import 'package:planet_pets_app/app/modules/Options/views/Password_Option.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/edit_products.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/add_products.dart';
 import 'package:planet_pets_app/auth_service.dart';
+import 'package:planet_pets_app/resources/models/models.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 
 class Products extends StatelessWidget {
-  const Products({Key? key}) : super(key: key);
+  CatalogModels? models;
+  Products({this.models, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +85,7 @@ class Products extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const EditProduct()));
+                              builder: (context) => EditProduct()));
                     },
                     child: Container(
                       margin:

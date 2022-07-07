@@ -17,7 +17,7 @@ import '../../../../resources/models/usermodel.dart';
 
 class ItemInfo extends StatelessWidget {
   final CatalogModels models;
-  UserModels? userModels;
+  String? userModels;
 
   ItemInfo(this.models, {this.userModels, Key? key}) : super(key: key);
 
@@ -303,14 +303,14 @@ class ItemInfo extends StatelessWidget {
                         // add the [https]
                         // ignore: deprecated_member_use
                         await launch(
-                          "https://wa.me/${userModels!.whatsapp}/?text${text}",
+                          "https://wa.me/${userModels}/?text${text}",
                         ); // new line
                         Navigator.of(context).pop();
                       } else {
                         // add the [https]
                         // ignore: deprecated_member_use
                         await launch(
-                          "https://api.whatsapp.com/send?phone=${userModels!.whatsapp}${text}",
+                          "https://api.whatsapp.com/send?phone=${userModels}${text}",
                         );
                         Navigator.of(context).pop();
                       }
@@ -365,14 +365,14 @@ class ItemInfo extends StatelessWidget {
   }
 
   void _openWhatsAppChat() async {
-    String _phoneNumber = userModels!.whatsapp.toString();
-    var _url = "https://api,whatsapp.con/send?phone=$_phoneNumber";
+    String _phoneNumber = userModels.toString();
+    var _url = "https://api.whatsapp.com/send?phone=$_phoneNumber";
     // var _url = "https://wa.me/$_phoneNumber?text=Hi";
     await launchUrlString(_url);
   }
 
   _callNumber() async {
-    String _phoneNumber = userModels!.whatsapp.toString();
+    String _phoneNumber = userModels.toString();
     await FlutterPhoneDirectCaller.callNumber(_phoneNumber);
   }
 

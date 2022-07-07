@@ -1,13 +1,48 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
+import 'package:planet_pets_app/resources/models/usermodel.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 import '../../../../widgets/medium_text.dart';
 import '../../../../widgets/semi_big_text.dart';
 
-class StoreRegister extends StatelessWidget {
-  const StoreRegister({Key? key}) : super(key: key);
+class StoreRegister extends StatefulWidget {
+  UserModels user;
+  StoreRegister(this.user, {Key? key}) : super(key: key);
+
+  @override
+  State<StoreRegister> createState() => _StoreRegisterState();
+}
+
+class _StoreRegisterState extends State<StoreRegister> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    storeController.dispose();
+    waController.dispose();
+  }
+
+  final TextEditingController storeController = TextEditingController();
+
+  final TextEditingController waController = TextEditingController();
+
+  void uploadStore() async {
+    FirebaseFirestore.instance
+        .collection('User')
+        .doc(widget.user.docId)
+        .update({
+      'email': widget.user.email,
+      'password': widget.user.password,
+      'role': 'store owner',
+      'store': storeController.text,
+      'username': widget.user.username,
+      'wa': waController.text,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +87,7 @@ class StoreRegister extends StatelessWidget {
                     child: Column(
                       children: [
                         TextField(
+                          controller: storeController,
                           maxLines: 1,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(
@@ -66,6 +102,7 @@ class StoreRegister extends StatelessWidget {
                                   fontWeight: FontWeight.w700)),
                         ),
                         TextField(
+                          controller: waController,
                           maxLines: 1,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(
@@ -104,11 +141,13 @@ class StoreRegister extends StatelessWidget {
                                       )),
                                   TextButton(
                                       onPressed: () {
+                                        uploadStore();
+
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                const StoreHomeDartView(),
+                                                StoreHomeDartView(),
                                           ),
                                           (route) => false,
                                         );

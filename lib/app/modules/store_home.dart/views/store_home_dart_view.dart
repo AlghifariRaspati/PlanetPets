@@ -181,8 +181,7 @@ class StoreHomeDartView extends GetView<StoreHomeDartController> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Products()));
+                                        builder: (context) => Products()));
                               },
                               child: SizedBox(
                                   width: MediaQuery.of(context).size.width,

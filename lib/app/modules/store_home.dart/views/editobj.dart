@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
@@ -18,14 +17,15 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 import '../../../../widgets/semi_big_text.dart';
 
-class AddProducts extends StatefulWidget {
-  const AddProducts({Key? key}) : super(key: key);
+class EditObj extends StatefulWidget {
+  String docId;
+  EditObj(this.docId, {Key? key}) : super(key: key);
 
   @override
-  State<AddProducts> createState() => _AddProductsState();
+  State<EditObj> createState() => _EditObjState();
 }
 
-class _AddProductsState extends State<AddProducts> {
+class _EditObjState extends State<EditObj> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController descController = TextEditingController();
@@ -47,7 +47,7 @@ class _AddProductsState extends State<AddProducts> {
     });
   }
 
-  void uploadImage() async {
+  void updateObj() async {
     if (_image == null) {
       Fluttertoast.showToast(msg: "please select an image");
     }
@@ -56,7 +56,10 @@ class _AddProductsState extends State<AddProducts> {
 
       await ref.putFile(_image!);
       imgUrl = await ref.getDownloadURL();
-      FirebaseFirestore.instance.collection('Catalog').doc().set({
+      FirebaseFirestore.instance
+          .collection('Catalog')
+          .doc(widget.docId)
+          .update({
         'title': titleController.text,
         'category': '',
         'description': descController.text,
@@ -90,7 +93,7 @@ class _AddProductsState extends State<AddProducts> {
                 title: Transform(
                     transform: Matrix4.translationValues(-20.0, 0.0, 0.0),
                     child: SemiBigText(
-                      text: "Manage Store Account",
+                      text: "Edit Product",
                       color: AppColor.mainColor,
                     )),
                 flexibleSpace: Container(
@@ -234,7 +237,7 @@ class _AddProductsState extends State<AddProducts> {
                                                 )),
                                             TextButton(
                                                 onPressed: () {
-                                                  uploadImage();
+                                                  updateObj();
 
                                                   Navigator.push(
                                                     context,
@@ -257,7 +260,7 @@ class _AddProductsState extends State<AddProducts> {
                                         Dimensions.radius8)),
                               ),
                               child: Text(
-                                "Add Product",
+                                "Add Changes",
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontFamily: 'Poppins',

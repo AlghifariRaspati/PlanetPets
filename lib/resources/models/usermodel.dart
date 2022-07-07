@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModels {
+  final String docId;
   final String email;
   final String password;
   final String role;
@@ -10,6 +11,7 @@ class UserModels {
   final String storename;
 
   UserModels({
+    required this.docId,
     required this.email,
     required this.password,
     required this.storename,
@@ -19,7 +21,9 @@ class UserModels {
   });
 
   factory UserModels.formData(DocumentSnapshot<Map<String, dynamic>> doc) {
+    print("awaiwiaw ${doc.data()}");
     return UserModels(
+      docId: doc.id,
       email: doc.data()!['email'],
       password: doc.data()!['password'],
       username: doc.data()!['username'],

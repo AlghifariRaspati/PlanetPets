@@ -25,7 +25,7 @@ class AuthChecker extends StatelessWidget {
                 .get()
                 .then((value) {
               if (value.data()!['role'] == 'store owner') {
-                return const StoreHomeDartView();
+                return StoreHomeDartView();
                 // } else if (value.data()!["role"] == 'store owner') {
                 //   return const NavBar();
               } else {

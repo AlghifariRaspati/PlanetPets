@@ -108,7 +108,7 @@ class StoreAcc extends StatelessWidget {
                                           context,
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                const StoreHomeDartView(),
+                                                StoreHomeDartView(),
                                           ),
                                           (route) => false,
                                         );

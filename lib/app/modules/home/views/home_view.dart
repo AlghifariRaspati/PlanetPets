@@ -2,12 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:planet_pets_app/app/modules/home/views/cat.dart';
-import 'package:planet_pets_app/app/modules/home/views/dog.dart';
 import 'package:planet_pets_app/app/modules/home/views/fish.dart';
 import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
 import 'package:planet_pets_app/app/modules/home/views/location.dart';
-import 'package:planet_pets_app/app/modules/home/views/bird.dart';
 import 'package:planet_pets_app/resources/database/database.dart';
 import 'package:planet_pets_app/resources/models/models.dart';
 import 'package:planet_pets_app/resources/models/usermodel.dart';
@@ -28,30 +25,33 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: Database().streamUser(),
-      builder:
-          (_, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      stream: Database(docId: user.uid).docUser(),
+      builder: (_, snapshot) {
         if (!snapshot.hasData) {
           return const Text("No data found");
         } else {
-          List<DocumentSnapshot<Map<String, dynamic>>> docs =
-              snapshot.data!.docs;
+          // List<DocumentSnapshot<Map<String, dynamic>>> docs =
+          //     snapshot.data!.docs;
+
+          UserModels userModels = UserModels.formData(snapshot.data!);
+
+          print(userModels);
 
           return Scaffold(
             backgroundColor: AppColor.bgColor2,
             body: SingleChildScrollView(
-              child: SafeArea(
-                child: Wrap(
-                  children: List.generate(
-                    1,
-                    (index) {
-                      UserModels userModels = UserModels.formData(docs[index]);
-                      return _scaffold(context, userModels);
-                    },
+              child: SafeArea(child: _scaffold(context, userModels)
+                  // Wrap(
+                  //   children: List.generate(
+                  //     1,
+                  //     (index) {
+                  //       UserModels userModels = UserModels.formData(docs[index]);
+                  //       return _scaffold(context, userModels);
+                  //     },
+                  //   ),
+                  // ),
                   ),
-                ),
-              ),
             ),
           );
         }
@@ -177,10 +177,10 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Bird()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const Bird()));
                     },
                     child: Container(
                       height: Dimensions.height40,
@@ -196,7 +196,7 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                     ),
                   ),
                   SizedBox(
-                    height: 5,
+                    height: Dimensions.height5,
                   ),
                   MediumText(
                     text: "Bird",
@@ -208,8 +208,8 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Cat()));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => const Cat()));
                     },
                     child: Container(
                         height: Dimensions.height40,
@@ -236,8 +236,8 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Dog()));
+                      // Navigator.push(context,
+                      //     MaterialPageRoute(builder: (context) => const Dog()));
                     },
                     child: Container(
                         height: Dimensions.height40,
@@ -346,7 +346,7 @@ Widget _listCatalog(BuildContext context,
           builder: (context) {
             return ItemInfo(
               models,
-              userModels: userModels,
+              userModels: userModels.whatsapp,
             );
           },
         ),

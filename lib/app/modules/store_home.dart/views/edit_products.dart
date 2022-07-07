@@ -1,16 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
+import 'package:planet_pets_app/app/modules/store_home.dart/views/editobj.dart';
+import 'package:planet_pets_app/resources/models/usermodel.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import '../../../../../resources/database/database.dart';
 import '../../../../../resources/models/models.dart';
-import '../../../../../widgets/small_text.dart';
 
 class EditProduct extends StatefulWidget {
-  const EditProduct({Key? key}) : super(key: key);
+  EditProduct({Key? key}) : super(key: key);
 
   @override
   State<EditProduct> createState() => _EditProductState();
@@ -78,116 +79,123 @@ class _EditProductState extends State<EditProduct> {
 Widget _listCatalog(
     BuildContext context, DocumentSnapshot<Map<String, dynamic>> docs) {
   CatalogModels models = CatalogModels.formData(docs);
+  void deleteObject() async {
+    try {
+      FirebaseFirestore.instance.collection('Catalog').doc(docs.id).delete();
+    } catch (error) {
+      Fluttertoast.showToast(msg: error.toString());
+    }
+  }
 
-  return InkWell(
-    onTap: () {
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) {
-      //       return ItemInfo(models);
-      //     },
-      //   ),
-      // );
-    },
-    child: Container(
-      margin: EdgeInsets.symmetric(
-          vertical: Dimensions.height10, horizontal: Dimensions.width15),
-      width: (MediaQuery.of(context).size.width),
-      decoration: BoxDecoration(
-        border: Border.all(
-            width: 1,
-            style: BorderStyle.solid,
-            color: AppColor.mainBlackColor.withOpacity(0.2)),
-        borderRadius: BorderRadius.circular(Dimensions.radius8),
-        color: AppColor.blankColor,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(1, 2),
-            blurRadius: 4,
-            color: AppColor.mainBlackColor.withOpacity(0.1),
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Container(
-                height: Dimensions.height100,
-                width: Dimensions.width100,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius8),
-                    image: DecorationImage(
-                      image: NetworkImage(models.image),
-                      fit: BoxFit.cover,
-                    )),
+  return Container(
+    margin: EdgeInsets.symmetric(
+        vertical: Dimensions.height10, horizontal: Dimensions.width15),
+    width: (MediaQuery.of(context).size.width),
+    decoration: BoxDecoration(
+      border: Border.all(
+          width: 1,
+          style: BorderStyle.solid,
+          color: AppColor.mainBlackColor.withOpacity(0.2)),
+      borderRadius: BorderRadius.circular(Dimensions.radius8),
+      color: AppColor.blankColor,
+      boxShadow: [
+        BoxShadow(
+          offset: Offset(1, 2),
+          blurRadius: 4,
+          color: AppColor.mainBlackColor.withOpacity(0.1),
+        ),
+      ],
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              height: Dimensions.height100,
+              width: Dimensions.width100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimensions.radius8),
+                  image: DecorationImage(
+                    image: NetworkImage(models.image),
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            Divider(
+              thickness: 1,
+              height: 1,
+              color: AppColor.mainBlackColor.withOpacity(0.2),
+            ),
+            SizedBox(
+              height: Dimensions.height10,
+            ),
+            Container(
+              padding: EdgeInsets.only(left: Dimensions.width10),
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    models.title,
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700,
+                      fontSize: Dimensions.font12,
+                      color: AppColor.mainBlackColor.withOpacity(0.7),
+                    ),
+                  ),
+                  SizedBox(
+                    height: Dimensions.height10,
+                  ),
+                  SizedBox(
+                    height: Dimensions.height30,
+                  )
+                ],
               ),
-              Divider(
-                thickness: 1,
-                height: 1,
-                color: AppColor.mainBlackColor.withOpacity(0.2),
+            ),
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.only(right: Dimensions.width10),
+          child: Column(
+            children: [
+              Text(
+                NumberFormat.currency(
+                        locale: 'id', symbol: 'IDR ', decimalDigits: 0)
+                    .format(int.parse(models.price.toString())),
+                style: TextStyle(
+                    color: AppColor.mainBlackColor.withOpacity(0.7),
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w700),
               ),
               SizedBox(
-                height: Dimensions.height10,
+                height: Dimensions.height30,
               ),
-              Container(
-                padding: EdgeInsets.only(left: Dimensions.width10),
-                alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      models.title,
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w700,
-                        fontSize: Dimensions.font12,
-                        color: AppColor.mainBlackColor.withOpacity(0.7),
-                      ),
-                    ),
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    SizedBox(
-                      height: Dimensions.height30,
-                    )
-                  ],
-                ),
-              ),
+              Row(
+                children: [
+                  InkWell(
+                      onTap: () {
+                        deleteObject();
+                      },
+                      child: Container(child: Icon(Icons.delete_rounded))),
+                  SizedBox(
+                    width: Dimensions.width25,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditObj(models.docId)),
+                        );
+                      },
+                      child: Container(child: Icon(Icons.edit_rounded))),
+                ],
+              )
             ],
           ),
-          Container(
-            padding: EdgeInsets.only(right: Dimensions.width10),
-            child: Column(
-              children: [
-                Text(
-                  NumberFormat.currency(
-                          locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                      .format(int.parse(models.price.toString())),
-                  style: TextStyle(
-                      color: AppColor.mainBlackColor.withOpacity(0.7),
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700),
-                ),
-                SizedBox(
-                  height: Dimensions.height30,
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.delete_rounded),
-                    SizedBox(
-                      width: Dimensions.width25,
-                    ),
-                    Icon(Icons.edit_rounded),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     ),
   );
 }
