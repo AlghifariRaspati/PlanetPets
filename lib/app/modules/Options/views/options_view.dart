@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:planet_pets_app/app/modules/Options/views/Email_Option.dart';
 import 'package:planet_pets_app/app/modules/Options/views/Password_Option.dart';
 import 'package:planet_pets_app/auth_service.dart';
+import 'package:planet_pets_app/resources/models/usermodel.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/medium_text.dart';
@@ -72,7 +73,7 @@ class OptionsView extends GetView<OptionsController> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const PassOption()));
+                              builder: (context) => PassOption()));
                     },
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,

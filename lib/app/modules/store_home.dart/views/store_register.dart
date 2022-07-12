@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
 import 'package:planet_pets_app/resources/models/usermodel.dart';

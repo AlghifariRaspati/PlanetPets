@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:planet_pets_app/app/modules/Intro/views/intro_view.dart';
-import 'package:planet_pets_app/app/modules/SignUp_SignIn/views/sign_up_sign_in_view.dart';
 import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/store_home_dart_view.dart';
 import 'package:planet_pets_app/verify_email.dart';
@@ -54,18 +53,6 @@ class AuthService {
           }
         });
   }
-
-  // AuthorizeAccess(BuildContext context) {
-  //   FirebaseAuth.instance.currentUser().then(user)(FirebaseFirestore.instance
-  //       .collection('/User')
-  //       .where('uid', isEqualTo: user.uid)
-  //       .getDocuments()
-  //       .then((docs) {
-  //     if (docs.documents[0].exists) {
-  //       if (docs.documents[0].data['role'] == 'store owner') {}
-  //     }
-  //   }));
-  // }
 
   signInWithGoogle(BuildContext context) async {
     final GoogleSignInAccount? googleUser =
