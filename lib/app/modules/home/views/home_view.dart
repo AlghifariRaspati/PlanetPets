@@ -31,9 +31,6 @@ class _HomeViewState extends State<HomeView> {
         if (!snapshot.hasData) {
           return const Text("No data found");
         } else {
-          // List<DocumentSnapshot<Map<String, dynamic>>> docs =
-          //     snapshot.data!.docs;
-
           UserModels userModels = UserModels.formData(snapshot.data!);
 
           print(userModels);
@@ -41,17 +38,7 @@ class _HomeViewState extends State<HomeView> {
           return Scaffold(
             backgroundColor: AppColor.bgColor2,
             body: SingleChildScrollView(
-              child: SafeArea(child: _scaffold(context, userModels)
-                  // Wrap(
-                  //   children: List.generate(
-                  //     1,
-                  //     (index) {
-                  //       UserModels userModels = UserModels.formData(docs[index]);
-                  //       return _scaffold(context, userModels);
-                  //     },
-                  //   ),
-                  // ),
-                  ),
+              child: SafeArea(child: _scaffold(context, userModels)),
             ),
           );
         }
@@ -263,12 +250,7 @@ Widget _scaffold(BuildContext context, UserModels userModels) {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Fish()));
-                    },
+                    onTap: () {},
                     child: Container(
                         height: Dimensions.height40,
                         width: Dimensions.width40,

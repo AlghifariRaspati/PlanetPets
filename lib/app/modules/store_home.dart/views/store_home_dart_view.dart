@@ -108,7 +108,7 @@ class StoreHomeDartView extends GetView<StoreHomeDartController> {
                                                 MaterialPageRoute(
                                                     builder: (BuildContext
                                                             context) =>
-                                                        const NavBar()),
+                                                        NavBar()),
                                                 (route) => false,
                                               );
                                             },

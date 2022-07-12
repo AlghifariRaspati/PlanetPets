@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:planet_pets_app/app/modules/home/views/favorite.dart';
-
 import 'package:planet_pets_app/app/modules/home/views/user.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
-
 import 'home_view.dart';
 
 class NavBar extends StatefulWidget {
@@ -26,20 +23,19 @@ class _NavBarState extends State<NavBar> {
   }
 
   final List<Widget> _pages = [
-    HomeView(),
-    FavoriteView(),
-    UserView(),
+    const HomeView(),
+    const FavoriteView(),
+    const UserView(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       body: _pages[_selectedIndex],
       extendBody: true,
       bottomNavigationBar: DotNavigationBar(
-          curve: Curves.easeOut,
-          duration: Duration(milliseconds: 500),
+          curve: Curves.linear,
+          duration: Duration(milliseconds: 300),
           borderRadius: Dimensions.radius20,
           dotIndicatorColor: AppColor.bgColor1,
           backgroundColor: AppColor.bgColor1,

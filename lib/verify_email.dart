@@ -59,7 +59,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
   @override
   Widget build(BuildContext context) => isEmailVerified
-      ? const NavBar()
+      ? NavBar()
       : Scaffold(
           backgroundColor: AppColor.bgColor1,
           appBar: AppBar(

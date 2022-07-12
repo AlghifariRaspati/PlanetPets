@@ -136,207 +136,61 @@ class UserView extends StatelessWidget {
                             SizedBox(
                               height: Dimensions.height20,
                             ),
-                            userModels.role != "store owner"
-                                ? Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Dimensions.height30),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: Dimensions.height50,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                    content: MediumText(
-                                                        text: "Create store?"),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  context),
-                                                          child: SemiBigText(
-                                                            text: "Cancel",
-                                                          )),
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.push(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (BuildContext
-                                                                          context) =>
-                                                                      StoreRegister(
-                                                                          userModels)),
-                                                            );
-                                                          },
-                                                          child: SemiBigText(
-                                                            text: "Yes",
-                                                          ))
-                                                    ],
-                                                  ));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColor.mainColor,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      Dimensions.radius20)),
-                                        ),
-                                        child: Text(
-                                          "Create Store",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Poppins',
-                                              fontSize: Dimensions.font16),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: Dimensions.height30),
-                                    child: SizedBox(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: Dimensions.height50,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) => AlertDialog(
-                                                    content: MediumText(
-                                                        text:
-                                                            "Return to User account?"),
-                                                    actions: [
-                                                      TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  context),
-                                                          child: SemiBigText(
-                                                            text: "Cancel",
-                                                          )),
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator
-                                                                .pushAndRemoveUntil(
-                                                              context,
-                                                              MaterialPageRoute(
-                                                                  builder: (BuildContext
-                                                                          context) =>
-                                                                      const NavBar()),
-                                                              (route) => false,
-                                                            );
-                                                          },
-                                                          child: SemiBigText(
-                                                            text: "Yes",
-                                                          ))
-                                                    ],
-                                                  ));
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: AppColor.mainColor,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      Dimensions.radius20)),
-                                        ),
-                                        child: Text(
-                                          "Go to User account",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontFamily: 'Poppins',
-                                              fontSize: Dimensions.font16),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                            SizedBox(
-                              height: Dimensions.height20,
-                            ),
-                            Container(
+                            Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: Dimensions.width30),
-                              child: Column(
-                                children: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const StoreAcc()));
-                                      },
-                                      child: SizedBox(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Manage Store Account",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    color: AppColor
-                                                        .mainBlackColor
-                                                        .withOpacity(0.7),
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize:
-                                                        Dimensions.font16),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: AppColor.mainBlackColor
-                                                    .withOpacity(0.7),
-                                              )
-                                            ],
-                                          ))),
-                                  const Divider(
-                                    height: 1,
-                                    thickness: 1.5,
+                                  horizontal: Dimensions.height30),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                height: Dimensions.height50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                              content: MediumText(
+                                                  text: "Create store?"),
+                                              actions: [
+                                                TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
+                                                    child: SemiBigText(
+                                                      text: "Cancel",
+                                                    )),
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                StoreRegister(
+                                                                    userModels)),
+                                                      ).then((value) =>
+                                                          Navigator.pop(
+                                                              context));
+                                                    },
+                                                    child: SemiBigText(
+                                                      text: "Yes",
+                                                    ))
+                                              ],
+                                            ));
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary: AppColor.mainColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.radius20)),
                                   ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Products()));
-                                      },
-                                      child: SizedBox(
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Manage Products",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                    color: AppColor
-                                                        .mainBlackColor
-                                                        .withOpacity(0.7),
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize:
-                                                        Dimensions.font16),
-                                              ),
-                                              Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: AppColor.mainBlackColor
-                                                    .withOpacity(0.7),
-                                              )
-                                            ],
-                                          ))),
-                                  const Divider(
-                                    height: 1,
-                                    thickness: 1.5,
+                                  child: Text(
+                                    "Create Store",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'Poppins',
+                                        fontSize: Dimensions.font16),
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: Dimensions.height20,
-                            ),
+                            )
                           ],
                         ),
                       )

@@ -128,7 +128,7 @@ class ProfileView extends GetView<ProfileController> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                const NavBar(),
+                                                NavBar(),
                                           ),
                                           (route) => false,
                                         );

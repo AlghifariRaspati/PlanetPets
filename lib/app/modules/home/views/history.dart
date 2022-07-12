@@ -56,15 +56,18 @@ class _HistoryState extends State<History> {
               List<DocumentSnapshot<Map<String, dynamic>>> documents;
               documents = snapshot.data!.docs;
 
-              return Wrap(
-                children: List.generate(
-                  documents.length,
-                  (index) {
-                    DocumentSnapshot<Map<String, dynamic>> docs =
-                        documents[index];
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                child: Wrap(
+                  children: List.generate(
+                    documents.length,
+                    (index) {
+                      DocumentSnapshot<Map<String, dynamic>> docs =
+                          documents[index];
 
-                    return _listCatalog(context, docs);
-                  },
+                      return _listCatalog(context, docs);
+                    },
+                  ),
                 ),
               );
             }

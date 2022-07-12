@@ -40,6 +40,7 @@ class _SignUpState extends State<SignUp> {
         backgroundColor: AppColor.bgColor1,
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(children: [
               Container(
                 alignment: Alignment.center,
@@ -226,7 +227,7 @@ class _SignUpState extends State<SignUp> {
               password: passwordController.text.trim());
 
       FirebaseFirestore.instance
-          .collection('user')
+          .collection('Favorite')
           .doc(userCredential.user!.uid)
           .get()
           .then((value) {

@@ -21,7 +21,6 @@ class UserModels {
   });
 
   factory UserModels.formData(DocumentSnapshot<Map<String, dynamic>> doc) {
-    print("awaiwiaw ${doc.data()}");
     return UserModels(
       docId: doc.id,
       email: doc.data()!['email'],

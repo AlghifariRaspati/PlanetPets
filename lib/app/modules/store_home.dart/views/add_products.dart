@@ -43,7 +43,7 @@ class _AddProductsState extends State<AddProducts> {
     final imageTemporary = File(image.path);
 
     setState(() {
-      this._image = imageTemporary;
+      _image = imageTemporary;
     });
   }
 
@@ -52,7 +52,10 @@ class _AddProductsState extends State<AddProducts> {
       Fluttertoast.showToast(msg: "please select an image");
     }
     try {
-      final ref = FirebaseStorage.instance.ref().child("image/");
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('Image')
+          .child(DateTime.now().toString() + 'png');
 
       await ref.putFile(_image!);
       imgUrl = await ref.getDownloadURL();
@@ -236,12 +239,13 @@ class _AddProductsState extends State<AddProducts> {
                                                 onPressed: () {
                                                   uploadImage();
 
-                                                  Navigator.push(
+                                                  Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (BuildContext
                                                                 context) =>
                                                             StoreHomeDartView()),
+                                                    (route) => false,
                                                   );
                                                 },
                                                 child: SemiBigText(

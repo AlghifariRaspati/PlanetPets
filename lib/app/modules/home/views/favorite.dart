@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:planet_pets_app/app/modules/home/views/item_info.dart';
@@ -18,6 +19,10 @@ class FavoriteView extends StatefulWidget {
 class _FavoriteViewState extends State<FavoriteView> {
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final userID = user!.uid;
+
     return Scaffold(
       backgroundColor: AppColor.bgColor2,
       body: SafeArea(
@@ -40,15 +45,19 @@ class _FavoriteViewState extends State<FavoriteView> {
                     ),
                   )),
               SizedBox(
-                height: 20,
+                height: Dimensions.height20,
               ),
               StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                stream: Database().streamCatalog(),
+                stream: FirebaseFirestore.instance
+                    .collection('Favorite')
+                    .doc(userID)
+                    .collection(userID)
+                    .snapshots(),
                 builder: (_,
                     AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                         snapshot) {
                   if (!snapshot.hasData) {
-                    return Container();
+                    return const Text("Loading...");
                   } else {
                     List<DocumentSnapshot<Map<String, dynamic>>> documents;
                     documents = snapshot.data!.docs;
@@ -150,14 +159,22 @@ Widget _listCatalog(
                 SizedBox(
                   height: Dimensions.height5,
                 ),
-                Text(
-                  NumberFormat.currency(
-                          locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                      .format(int.parse(models.price.toString())),
-                  style: TextStyle(
-                      color: AppColor.mainBlackColor.withOpacity(0.7),
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        NumberFormat.currency(
+                                locale: 'id', symbol: 'IDR ', decimalDigits: 0)
+                            .format(int.parse(models.price.toString())),
+                        style: TextStyle(
+                            color: AppColor.mainBlackColor.withOpacity(0.7),
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    IconButton(
+                        onPressed: () {}, icon: Icon(Icons.delete_rounded))
+                  ],
                 ),
                 SizedBox(
                   height: Dimensions.height10,

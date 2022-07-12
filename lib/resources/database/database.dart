@@ -15,6 +15,13 @@ class Database {
         .snapshots();
   }
 
+  Stream<QuerySnapshot<Map<String, dynamic>>> streamFavorite() {
+    return firestore
+        .collection('Favorite')
+        .where('store', isEqualTo: store)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot<Map<String, dynamic>>> streamUser() {
     return firestore.collection('User').snapshots();
   }

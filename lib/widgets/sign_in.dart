@@ -31,6 +31,7 @@ class _SignInState extends State<SignIn> {
         backgroundColor: AppColor.bgColor1,
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
             child: Column(children: [
               Container(
                 alignment: Alignment.center,

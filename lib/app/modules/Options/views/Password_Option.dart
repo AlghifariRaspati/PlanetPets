@@ -1,13 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:planet_pets_app/app/modules/Options/views/options_view.dart';
+import 'package:planet_pets_app/app/modules/home/views/navbar.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/dimensions.dart';
 import '../../../../widgets/medium_text.dart';
 import '../../../../widgets/semi_big_text.dart';
 
-class PassOption extends StatelessWidget {
+class PassOption extends StatefulWidget {
   const PassOption({Key? key}) : super(key: key);
+
+  @override
+  State<PassOption> createState() => _PassOptionState();
+}
+
+class _PassOptionState extends State<PassOption> {
+  final TextEditingController passwordController = TextEditingController();
+
+  void updPass() async {
+    FirebaseFirestore.instance.collection('User').doc().set({
+      'email': '',
+      'password': passwordController,
+      'role': '',
+      'store': '',
+      'username': '',
+      'wa': ''
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +64,7 @@ class PassOption extends StatelessWidget {
                   child: Column(
                     children: [
                       TextField(
-                          maxLines: 1,
-                          decoration: InputDecoration(
-                              border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: AppColor.mainBlackColor
-                                          .withOpacity(0.1))),
-                              labelText: "Current password",
-                              labelStyle: TextStyle(
-                                  color:
-                                      AppColor.mainBlackColor.withOpacity(0.2),
-                                  fontFamily: "Poppins",
-                                  fontWeight: FontWeight.w700))),
-                      TextField(
+                          controller: passwordController,
                           maxLines: 1,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(
@@ -93,12 +101,14 @@ class PassOption extends StatelessWidget {
                                           )),
                                       TextButton(
                                           onPressed: () {
+                                            updPass();
+
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(
                                                 builder:
                                                     (BuildContext context) =>
-                                                        OptionsView(),
+                                                        NavBar(),
                                               ),
                                               (route) => false,
                                             );

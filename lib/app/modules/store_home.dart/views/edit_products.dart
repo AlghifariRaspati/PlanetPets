@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:planet_pets_app/app/modules/store_home.dart/views/editobj.dart';
-import 'package:planet_pets_app/resources/models/usermodel.dart';
 import 'package:planet_pets_app/utils/colors.dart';
 import 'package:planet_pets_app/utils/dimensions.dart';
 import 'package:planet_pets_app/widgets/semi_big_text.dart';
 import '../../../../../resources/database/database.dart';
 import '../../../../../resources/models/models.dart';
+import '../../../../widgets/medium_text.dart';
 
 class EditProduct extends StatefulWidget {
   EditProduct({Key? key}) : super(key: key);
@@ -57,15 +57,18 @@ class _EditProductState extends State<EditProduct> {
               List<DocumentSnapshot<Map<String, dynamic>>> documents;
               documents = snapshot.data!.docs;
 
-              return Wrap(
-                children: List.generate(
-                  documents.length,
-                  (index) {
-                    DocumentSnapshot<Map<String, dynamic>> docs =
-                        documents[index];
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                child: Wrap(
+                  children: List.generate(
+                    documents.length,
+                    (index) {
+                      DocumentSnapshot<Map<String, dynamic>> docs =
+                          documents[index];
 
-                    return _listCatalog(context, docs);
-                  },
+                      return _listCatalog(context, docs);
+                    },
+                  ),
                 ),
               );
             }
@@ -109,90 +112,115 @@ Widget _listCatalog(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Container(
-              height: Dimensions.height100,
-              width: Dimensions.width100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius8),
-                  image: DecorationImage(
-                    image: NetworkImage(models.image),
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            Divider(
-              thickness: 1,
-              height: 1,
-              color: AppColor.mainBlackColor.withOpacity(0.2),
-            ),
-            SizedBox(
-              height: Dimensions.height10,
-            ),
-            Container(
-              padding: EdgeInsets.only(left: Dimensions.width10),
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    models.title,
-                    style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700,
-                      fontSize: Dimensions.font12,
-                      color: AppColor.mainBlackColor.withOpacity(0.7),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Dimensions.height10,
-                  ),
-                  SizedBox(
-                    height: Dimensions.height30,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-        Container(
-          padding: EdgeInsets.only(right: Dimensions.width10),
-          child: Column(
+        Expanded(
+          flex: 3,
+          child: Row(
             children: [
-              Text(
-                NumberFormat.currency(
-                        locale: 'id', symbol: 'IDR ', decimalDigits: 0)
-                    .format(int.parse(models.price.toString())),
-                style: TextStyle(
-                    color: AppColor.mainBlackColor.withOpacity(0.7),
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w700),
+              Container(
+                height: Dimensions.height100,
+                width: Dimensions.width100,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius8),
+                    image: DecorationImage(
+                      image: NetworkImage(models.image),
+                      fit: BoxFit.cover,
+                    )),
+              ),
+              Divider(
+                thickness: 1,
+                height: 1,
+                color: AppColor.mainBlackColor.withOpacity(0.2),
               ),
               SizedBox(
-                height: Dimensions.height30,
+                height: Dimensions.height10,
               ),
-              Row(
-                children: [
-                  InkWell(
-                      onTap: () {
-                        deleteObject();
-                      },
-                      child: Container(child: Icon(Icons.delete_rounded))),
-                  SizedBox(
-                    width: Dimensions.width25,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditObj(models.docId)),
-                        );
-                      },
-                      child: Container(child: Icon(Icons.edit_rounded))),
-                ],
-              )
+              Container(
+                padding: EdgeInsets.only(left: Dimensions.width10),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      models.title,
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700,
+                        fontSize: Dimensions.font12,
+                        color: AppColor.mainBlackColor.withOpacity(0.7),
+                      ),
+                    ),
+                    SizedBox(
+                      height: Dimensions.height50,
+                    )
+                  ],
+                ),
+              ),
             ],
+          ),
+        ),
+        Expanded(
+          flex: 0,
+          child: Container(
+            padding: EdgeInsets.only(right: Dimensions.width10),
+            child: Column(
+              children: [
+                Text(
+                  NumberFormat.currency(
+                          locale: 'id', symbol: 'IDR ', decimalDigits: 0)
+                      .format(int.parse(models.price.toString())),
+                  style: TextStyle(
+                      color: AppColor.mainBlackColor.withOpacity(0.7),
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w700),
+                ),
+                SizedBox(
+                  height: Dimensions.height30,
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    content: MediumText(text: "Delete Item?"),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          child: SemiBigText(
+                                            text: "Cancel",
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            deleteObject();
+
+                                            Navigator.pop(context);
+                                          },
+                                          child: SemiBigText(
+                                            text: "Yes",
+                                          ))
+                                    ],
+                                  ));
+                        },
+                        child: Container(child: Icon(Icons.delete_rounded))),
+                    SizedBox(
+                      width: Dimensions.width25,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditObj(models.docId)),
+                          );
+                        },
+                        child: Container(child: Icon(Icons.edit_rounded))),
+                  ],
+                )
+              ],
+            ),
           ),
         )
       ],

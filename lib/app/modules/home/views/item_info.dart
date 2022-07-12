@@ -65,7 +65,7 @@ class ItemInfo extends StatelessWidget {
                                   color: AppColor.mainColor,
                                 ))),
                         InkWell(
-                            onTap: () => Navigator.pop(context),
+                            onTap: () {},
                             child: Container(
                                 decoration: BoxDecoration(
                                     color: AppColor.mainBlackColor
@@ -212,13 +212,7 @@ class ItemInfo extends StatelessWidget {
                                         margin: EdgeInsets.only(
                                             right: Dimensions.width5),
                                         child: TextButton(
-                                            onPressed: () {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return const StoreInfo();
-                                              }));
-                                            },
+                                            onPressed: () {},
                                             child: Text(
                                               "See details",
                                               style: TextStyle(

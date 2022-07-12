@@ -34,7 +34,6 @@ class _EditObjState extends State<EditObj> {
 
   File? _image;
   String? imgUrl;
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -52,7 +51,10 @@ class _EditObjState extends State<EditObj> {
       Fluttertoast.showToast(msg: "please select an image");
     }
     try {
-      final ref = FirebaseStorage.instance.ref().child("image/");
+      final ref = FirebaseStorage.instance
+          .ref()
+          .child('Image')
+          .child(DateTime.now().toString() + 'png');
 
       await ref.putFile(_image!);
       imgUrl = await ref.getDownloadURL();
@@ -76,9 +78,6 @@ class _EditObjState extends State<EditObj> {
 
   @override
   Widget build(BuildContext context) {
-    final CollectionReference addProducts =
-        FirebaseFirestore.instance.collection('Catalog');
-
     return Scaffold(
         backgroundColor: AppColor.bgColor2,
         appBar: PreferredSize(
@@ -179,30 +178,6 @@ class _EditObjState extends State<EditObj> {
                         InkWell(
                             onTap: () {
                               getImage();
-                              // getImage().then((value) {
-                              //   FirebaseStorage storage =
-                              //       FirebaseStorage.instance;
-                              //   Reference ref = storage
-                              //       .ref("image/${titleController.text}.png")
-                              //       .child(
-                              //           "image1" + DateTime.now().toString());
-                              //   UploadTask uploadTask = ref.putFile(_image!);
-                              //   uploadTask.then((p0) async {
-                              //     kosong = await p0.ref.getDownloadURL();
-                              //     setState(() {});
-                              //     print(kosong);
-                              //   });
-                              // });
-                              // FirebaseFirestore.instance
-                              //     .collection('Catalog')
-                              //     .add({
-                              //   'image': kosong,
-                              //   'category': '',
-                              //   'description': '',
-                              //   'price': '',
-                              //   'store': '',
-                              //   'title': ''
-                              // });
                             },
                             child: Icon(Icons.add_rounded,
                                 size: Dimensions.height100,
@@ -239,12 +214,13 @@ class _EditObjState extends State<EditObj> {
                                                 onPressed: () {
                                                   updateObj();
 
-                                                  Navigator.push(
+                                                  Navigator.pushAndRemoveUntil(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (BuildContext
                                                                 context) =>
-                                                            StoreHomeDartView()),
+                                                            const StoreHomeDartView()),
+                                                    (route) => false,
                                                   );
                                                 },
                                                 child: SemiBigText(

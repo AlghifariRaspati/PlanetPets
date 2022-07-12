@@ -48,7 +48,7 @@ class AuthService {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return const NavBar();
+            return NavBar();
           } else {
             return VerifyEmail();
           }

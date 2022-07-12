@@ -99,62 +99,62 @@ class SignUpSignInView extends GetView<SignUpSignInController> {
               SizedBox(
                 height: Dimensions.height10,
               ),
-              Row(children: <Widget>[
-                Expanded(
-                    child: Divider(
-                  color: AppColor.blankColor.withOpacity(0.5),
-                )),
-                Text(
-                  " OR ",
-                  style: TextStyle(
-                    color: AppColor.blankColor.withOpacity(0.5),
-                  ),
-                ),
-                Expanded(
-                    child: Divider(
-                  color: AppColor.blankColor.withOpacity(0.5),
-                )),
-              ]),
-              SizedBox(
-                height: Dimensions.height10,
-              ),
-              SizedBox(
-                height: Dimensions.height10,
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: Dimensions.height50,
-                child: ElevatedButton(
-                    onPressed: () {
-                      AuthService().signInWithGoogle(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.radius20)),
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          height: Dimensions.height25,
-                          width: Dimensions.width25,
-                          child: Image.asset(
-                            "assets/images/google_icon.png",
-                          ),
-                        ),
-                        SizedBox(width: Dimensions.height40),
-                        Text(
-                          "Continue with google",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 201, 201, 201),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Poppins',
-                              fontSize: Dimensions.font16),
-                        ),
-                      ],
-                    )),
-              ),
+              // Row(children: <Widget>[
+              //   Expanded(
+              //       child: Divider(
+              //     color: AppColor.blankColor.withOpacity(0.5),
+              //   )),
+              //   Text(
+              //     " OR ",
+              //     style: TextStyle(
+              //       color: AppColor.blankColor.withOpacity(0.5),
+              //     ),
+              //   ),
+              //   Expanded(
+              //       child: Divider(
+              //     color: AppColor.blankColor.withOpacity(0.5),
+              //   )),
+              // ]),
+              // SizedBox(
+              //   height: Dimensions.height10,
+              // ),
+              // SizedBox(
+              //   height: Dimensions.height10,
+              // ),
+              // Container(
+              //   width: MediaQuery.of(context).size.width,
+              //   height: Dimensions.height50,
+              //   child: ElevatedButton(
+              //       onPressed: () {
+              //         AuthService().signInWithGoogle(context);
+              //       },
+              //       style: ElevatedButton.styleFrom(
+              //         primary: Colors.white,
+              //         shape: RoundedRectangleBorder(
+              //             borderRadius:
+              //                 BorderRadius.circular(Dimensions.radius20)),
+              //       ),
+              //       child: Row(
+              //         children: [
+              //           SizedBox(
+              //             height: Dimensions.height25,
+              //             width: Dimensions.width25,
+              //             child: Image.asset(
+              //               "assets/images/google_icon.png",
+              //             ),
+              //           ),
+              //           SizedBox(width: Dimensions.height40),
+              //           Text(
+              //             "Continue with google",
+              //             style: TextStyle(
+              //                 color: Color.fromARGB(255, 201, 201, 201),
+              //                 fontWeight: FontWeight.bold,
+              //                 fontFamily: 'Poppins',
+              //                 fontSize: Dimensions.font16),
+              //           ),
+              //         ],
+              //       )),
+              // ),
             ],
           ),
         ),
